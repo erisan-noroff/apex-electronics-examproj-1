@@ -1,12 +1,11 @@
 @import './variables.css';
 
-*, *::before, *::after {
+*,*::before, *::after {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 body {
+    margin: 0;
     font-family: var(--font-body), sans-serif;
     font-size: 16px;
     display: flex;
@@ -54,6 +53,7 @@ h2 {
 
 header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     padding: var(--spacing-2) var(--spacing-3);
     background-color: var(--background);
@@ -87,7 +87,47 @@ ul > li > a {
 }
 
 .cart-icon {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     fill: var(--primary-blue);
+}
+
+.mobile-hamburger-button {
+    width: 24px;
+    height: 24px;
+    fill: var(--primary-blue);
+    z-index: 1;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-nav {
+    display: none;
+    width: 100%;
+}
+
+.mobile-nav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: var(--spacing-1) var(--spacing-1) var(--spacing-1) 0;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: var(--spacing-1);
+    }
+    
+    .desktop-menu {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
 }
