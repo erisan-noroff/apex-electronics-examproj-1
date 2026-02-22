@@ -84,17 +84,11 @@ ul > li > a {
     justify-content: center;
 }
 
-.cart-icon {
-    width: 24px;
-    height: 24px;
-    fill: var(--primary-blue);
-}
-
+.cart-icon,
 .mobile-hamburger-button {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
     fill: var(--primary-blue);
-    z-index: 1;
 }
 
 .mobile-menu-toggle {
