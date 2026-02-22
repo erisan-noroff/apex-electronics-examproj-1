@@ -44,6 +44,10 @@ h2 {
     font-size: 1.5rem;
 }
 
+h3 {
+    font-size: 1.25rem;
+}
+
 .logo {
     font-size: 1.75rem;
     font-weight: 700;
@@ -75,7 +79,7 @@ nav ul {
     font-size: 1.125rem;
 }
 
-ul > li > a {
+a {
     text-decoration: none;
 }
 
@@ -110,16 +114,40 @@ ul > li > a {
     padding: var(--spacing-1) var(--spacing-1) var(--spacing-1) 0;
 }
 
+.fa-solid {
+    color: var(--primary-blue);
+}
+
 @media (max-width: 768px) {
     header {
         padding: var(--spacing-1);
     }
-    
+
     .desktop-menu {
         display: none;
     }
-    
+
     .mobile-menu-toggle {
         display: block;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+    
+    h3 {
+        font-size: 1.125rem;
+    }
+    
+    p, button {
+        font-size: 0.875rem;
     }
 }
