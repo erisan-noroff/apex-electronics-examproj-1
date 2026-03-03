@@ -17,41 +17,12 @@ main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin-top: var(--spacing-6);
-    margin-bottom: var(--spacing-6);
+    padding: var(--spacing-6) var(--spacing-3);
     gap: var(--spacing-4);
 }
 
 body, header, main {
     background-color: var(--background);
-}
-
-.logo, h1, h2, nav {
-    font-family: var(--font-heading), sans-serif;
-    color: var(--primary-blue);
-}
-
-h2, h3, nav, button {
-    font-weight: 600;
-}
-
-h1 {
-    font-size: 2rem;
-    font-weight: 700;
-}
-
-h2 {
-    font-size: 1.5rem;
-}
-
-h3 {
-    font-size: 1.25rem;
-}
-
-.logo {
-    font-size: 1.75rem;
-    font-weight: 700;
-    letter-spacing: 0.0625rem;
 }
 
 header {
@@ -83,6 +54,38 @@ a {
     text-decoration: none;
 }
 
+p {
+    margin: 0.25rem;
+}
+
+.logo, h1, h2, nav {
+    font-family: var(--font-heading), sans-serif;
+    color: var(--primary-blue);
+}
+
+h2, h3, nav, button {
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+.logo {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: 0.0625rem;
+}
+
 .products-carousel, .products-grid {
     display: flex;
     justify-content: center;
@@ -92,7 +95,7 @@ a {
 .mobile-hamburger-button {
     width: 1.5rem;
     height: 1.5rem;
-    fill: var(--primary-blue);
+    color: var(--primary-blue);
 }
 
 .mobile-menu-toggle {
@@ -114,8 +117,74 @@ a {
     padding: var(--spacing-1) var(--spacing-1) var(--spacing-1) 0;
 }
 
-.fa-solid {
-    color: var(--primary-blue);
+.toast-container {
+    display: flex;
+    width: 22rem;
+    height: 5rem;
+    z-index: 1;
+    background-color: var(--card-background);
+    position: absolute;
+    right: var(--spacing-3);
+}
+
+.toast-indicator {
+    width: 0.5rem;
+    height: 5rem;
+}
+
+.toast-success {
+    background-color: var(--success);
+}
+
+.toast-error {
+    background-color: var(--error);
+}
+
+.toast-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    color: var(--background);
+}
+
+.toast-icon.toast-success {
+    background-color: var(--success);
+}
+
+.toast-icon.toast-error {
+    background-color: var(--error);
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-2);
+    gap: var(--spacing-2);
+}
+
+.toast-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-semibold {
+    font-weight: 600;
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.toast-container > button {
+    all: unset;
+    cursor: pointer;
+    position: absolute;
+    top: var(--spacing-1);
+    right: var(--spacing-1);
+    color: var(--text-secondary);
 }
 
 @media (max-width: 768px) {
