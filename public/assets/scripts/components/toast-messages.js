@@ -22,7 +22,7 @@ export const ToastMessage = {
     },
     /**
      * Display error toast message
-     * @param {title} title - Toast title
+     * @param {string} title - Toast title
      * @param {string} message - Toast message
      */
     error(title, message) {
