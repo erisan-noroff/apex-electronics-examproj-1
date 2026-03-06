@@ -2,13 +2,13 @@
 const baseApiUrl = 'https://v2.api.noroff.dev/online-shop';
 
 export async function getAllProducts() {
-    const PRODUCT_TAGS = ['audio', 'electronics', 'headphones', 'storage', 'watch'];
+    const PRODUCT_TAGS = ['audio', 'headphones', 'electronics', 'watch', 'storage'];
     const response = await fetch(`${baseApiUrl}`);
     if (!response.ok) throw new Error();
-    const data = (await response.json()).data.filter(x => PRODUCT_TAGS.some(tag => x.tags.includes(tag)));
+    const data = (await response.json()).data;
     if (!data || data.length < 12) throw new Error();
-    console.log(data);
-    return data;
+    return data.filter(x => x.tags.some(tag => PRODUCT_TAGS.includes(tag)))
+                         .sort((a, b) => PRODUCT_TAGS.findIndex(t => a.tags.includes(t)) - PRODUCT_TAGS.findIndex(t => b.tags.includes(t)));
 }
 
 export async function getProductById(id) {
