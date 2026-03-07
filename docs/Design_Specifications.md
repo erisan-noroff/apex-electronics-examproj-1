@@ -14,10 +14,8 @@ All developers must adhere to these design specifications when implementing the 
 #### Secondary
 - **Colour:** #6B7280
 - **Usage:** Descriptions, placeholders, original prices (when discounted)
-### Accent Orange
-- **Default:** #F97316
-- **Hover:** #EA580C
-- **Usage:** CTA buttons and Discounts
+### Discounted Prices
+**Colour:** #15803D
 ### Borders
 **Colour:** #E5E7EB
 ### Background
@@ -27,7 +25,7 @@ All developers must adhere to these design specifications when implementing the 
 ### Footer
 **Background Colour:** Body Text Primary
 **Text Colour:** Background
-### Star Icons (reviews)
+### Star Icons (ratings)
 **Colour:** #FBBF24
 ***
 
