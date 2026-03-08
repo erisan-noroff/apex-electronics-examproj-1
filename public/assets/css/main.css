@@ -250,7 +250,7 @@ button {
     z-index: 1;
     background-color: var(--card-background);
     position: absolute;
-    right: var(--spacing-4);
+    right: 0;
 }
 
 .toast-indicator {
@@ -402,5 +402,10 @@ button {
     
     .product-review {
         padding-top: var(--spacing-2);
+    }
+
+    .toast-container {
+        top: var(--spacing-7);
+        right: 0;
     }
 }
