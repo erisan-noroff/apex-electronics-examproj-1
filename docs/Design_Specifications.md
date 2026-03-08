@@ -14,10 +14,8 @@ All developers must adhere to these design specifications when implementing the 
 #### Secondary
 - **Colour:** #6B7280
 - **Usage:** Descriptions, placeholders, original prices (when discounted)
-### Accent Orange
-- **Default:** #F97316
-- **Hover:** #EA580C
-- **Usage:** CTA buttons and Discounts
+### Discounted Prices
+**Colour:** #15803D
 ### Borders
 **Colour:** #E5E7EB
 ### Background
@@ -27,7 +25,7 @@ All developers must adhere to these design specifications when implementing the 
 ### Footer
 **Background Colour:** Body Text Primary
 **Text Colour:** Background
-### Star Icons (reviews)
+### Star Icons (ratings)
 **Colour:** #FBBF24
 ***
 
@@ -56,9 +54,10 @@ All developers must adhere to these design specifications when implementing the 
 ## Spacing (8-point scale)
 | Scale | Value | Usage |
 |-------|-------|-------|
-| 1 | 8px | Tight spacing (icon gaps, badges) |
-| 2 | 16px | General padding/margin (navbar, cards) |
-| 3 | 24px | Section dividers, comfortable padding |
-| 4 | 32px | Larger section separation |
-| 5 | 40px | Major content blocks |
-| 6 | 48px | Page-level structure |
+| 1     | 4px | Extra tight spacing (text gaps, small icons) |
+| 2     | 8px | Tight spacing (icon gaps, badges) |
+| 3     | 16px | General padding/margin (navbar, cards) |
+| 4     | 24px | Section dividers, comfortable padding |
+| 5     | 32px | Larger section separation |
+| 6     | 40px | Major content blocks |
+| 7     | 48px | Page-level structure |
