@@ -32,7 +32,7 @@ export const ToastMessage = {
     * Display API data load error toast message
     */
     apiDataLoadError() {
-        displayToast('error', 'Unable to fetch data', 'An error occurred when fetching data.\nPlease refresh the page.');
+        displayToast('error', 'Unable to fetch data', 'An error occurred when fetching data. Please refresh the page.');
     }
 }
 
