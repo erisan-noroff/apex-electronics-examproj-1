@@ -331,6 +331,11 @@ button {
     header {
         padding: var(--spacing-2);
     }
+    
+    main {
+        padding: var(--spacing-6) var(--spacing-3);
+        gap: var(--spacing-4);
+    }
 
     .desktop-menu {
         display: none;
@@ -362,5 +367,40 @@ button {
     
     nav a {
         font-size: 0.875rem;
+    }
+    
+    .product-info-content {
+        gap: var(--spacing-2);
+    }
+
+    .product-info-container {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .product-info-container img {
+        width: 15.625rem;
+        height: 15.625rem;
+    }
+    
+    .ratings {
+        font-size: 0.875rem;
+    }
+    
+    .product-tags {
+        font-size: 0.875rem;
+    }
+    
+    .product-tag {
+        padding: var(--spacing-1);
+    }
+    
+    .product-reviews {
+        gap: var(--spacing-2);
+        max-width: 100%;
+    }
+    
+    .product-review {
+        padding-top: var(--spacing-2);
     }
 }
