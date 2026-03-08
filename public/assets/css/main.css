@@ -314,9 +314,17 @@ button {
     color: var(--text-secondary);
 }
 
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    justify-content: center;
+    align-items: center;
+}
+
 .spinner {
-    width: 120px;
-    height: 120px;
+    width: 7.5rem;
+    height: 7.5rem;
     border: 8px solid var(--text-secondary);
     border-top-color: var(--primary-blue);
     border-radius: 50%;
@@ -378,6 +386,10 @@ button {
         gap: 0;
     }
 
+    .product-info-container.loading-state {
+        gap: var(--spacing-2);
+    }
+
     .product-info-container img {
         width: 15.625rem;
         height: 15.625rem;
@@ -407,5 +419,10 @@ button {
     .toast-container {
         top: var(--spacing-7);
         right: 0;
+    }
+    
+    .spinner {
+        width: 5rem;
+        height: 5rem;
     }
 }

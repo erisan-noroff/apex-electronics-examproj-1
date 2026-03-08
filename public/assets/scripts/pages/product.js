@@ -2,16 +2,16 @@ import { getProductById } from '../api/productApi.js';
 import { ToastMessage } from '../components/toast-messages.js';
 import { createRatingsElement, createStarsElement } from '../components/ratings.js';
 import { PrimaryButton } from '../components/buttons.js';
+import { isAuthenticated } from '../utils/authentication.js';
 
-//const id = new URLSearchParams(window.location.search).get('id');
-const id = '31e3a66f-2dbe-47ae-b80d-d9e5814f3e32';
-const container = document.getElementById('product-info');
+const id = new URLSearchParams(window.location.search).get('id');
+const main = document.querySelector('main');
 if (id) {
     try {
         const product = await getProductById(id);
-        renderProduct(product);
-        /* setTimeout(() => {
-        }, 2000); */
+        setTimeout(() => {
+            renderProduct(product);
+        }, 2000);
     } catch {
         ToastMessage.apiDataLoadError();
         renderNotFound();
@@ -27,18 +27,23 @@ function renderNotFound() {
     wrapper.appendChild(backToHomeLink);
     errorText.textContent = 'Product not found';
     backToHomeLink.textContent = 'Back to home';
-    backToHomeLink.href = '/index.html';
+    backToHomeLink.href = new URL('index.html', window.location.href).toString();
 
-    container.replaceChildren(wrapper);
+    main.replaceChildren(wrapper);
 }
 
 function renderProduct(product) {
+    const section = document.createElement('section');
+    section.classList.add('product-info-container');
+    
     const image = document.createElement('img');
     image.src = product.image.url;
     image.alt = product.image.alt;
+    section.appendChild(image);
     
     const productInfoContent = document.createElement('div');
     productInfoContent.classList.add('product-info-content');
+    section.appendChild(productInfoContent);
     
     const productName = document.createElement('h1');
     productName.textContent = product.title;
@@ -51,8 +56,8 @@ function renderProduct(product) {
     productInfoContent.appendChild(productInfoPriceRatings);
     
     const reviewRow = createRatingsElement(product.rating, product.reviews);
-    productInfoPriceRatings.appendChild(reviewRow); 
-    container.replaceChildren(image, productInfoContent);
+    productInfoPriceRatings.appendChild(reviewRow);
+    main.replaceChildren(section);
     
     const description = document.createElement('p');
     description.textContent = product.description;
@@ -64,8 +69,11 @@ function renderProduct(product) {
     
     if (product.reviews.length > 0) renderProductReviews(product.rating, product.reviews);
     
-    const button = PrimaryButton('Add to Cart', 'button', 'add-to-cart');
-    productInfoContent.appendChild(button);
+    if (!isAuthenticated())
+    {
+        const button = addToCart();
+        productInfoContent.appendChild(button);
+    }
     
     const share = shareLinkElement(product.id);
     productInfoContent.appendChild(share);
@@ -83,6 +91,16 @@ function productTagsElements(tags) {
     }
     
     return tagsElement;
+}
+
+function addToCart() {
+    const button = PrimaryButton('Add to Cart', 'button', 'add-to-cart');
+    
+    button.addEventListener('click', () => {
+        ToastMessage.success('Added to cart', 'Product has been added to your cart');
+    });
+    
+    return button;
 }
 
 function shareLinkElement(productId) {
