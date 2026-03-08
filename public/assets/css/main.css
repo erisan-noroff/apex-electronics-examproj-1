@@ -148,6 +148,7 @@ h3 {
     height: 1.5rem;
     border-radius: 50%;
     color: var(--background);
+    flex-shrink: 0;
 }
 
 .toast-icon.toast-success {
