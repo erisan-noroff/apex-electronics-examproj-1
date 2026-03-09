@@ -4,19 +4,21 @@ import { createRatingsElement, createStarsElement } from '../components/ratings.
 import { PrimaryButton } from '../components/buttons.js';
 import { isAuthenticated } from '../utils/authentication.js';
 
-const id = new URLSearchParams(window.location.search).get('id');
 const main = document.querySelector('main');
-if (id) {
-    try {
-        const product = await getProductById(id);
-        setTimeout(() => {
-            renderProduct(product);
-        }, 2000);
-    } catch {
-        ToastMessage.apiDataLoadError();
-        renderNotFound();
-    }
-} else renderNotFound();
+async function init() {
+    const id = new URLSearchParams(window.location.search).get('id');
+    if (id) {
+        try {
+            const product = await getProductById(id);
+            setTimeout(() => {
+                renderProduct(product);
+            }, 2000);
+        } catch {
+            ToastMessage.apiDataLoadError();
+            renderNotFound();
+        }
+    } else renderNotFound();
+}
 
 function renderNotFound() {
     const wrapper = document.createElement('div');
@@ -181,3 +183,5 @@ function createPriceElement(discountedPrice, price) {
     
     return priceElement;
 }
+
+await init();
