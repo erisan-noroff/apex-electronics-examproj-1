@@ -36,7 +36,7 @@ function renderNotFound() {
 
 function renderProduct(product) {
     const section = document.createElement('section');
-    section.classList.add('product-info-container');
+    section.classList.add('product-info-wrapper');
     
     const image = document.createElement('img');
     image.src = product.image.url;
