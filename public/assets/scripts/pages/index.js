@@ -1,5 +1,6 @@
 import { getAllProducts } from '../api/productApi.js';
 import { ToastMessage } from '../components/toast-messages.js';
+import { ButtonType } from '../components/buttons.js';
 
 async function init() {
     try {
@@ -34,6 +35,29 @@ function renderCarousel(products) {
     carouselItems.unshift(carouselItems[0].cloneNode(true));
     carouselItems.push(carouselItems[products.length - 1].cloneNode(true))
     carousel.replaceChildren(...carouselItems);
+    
+    carouselNavigationButtons();
 }
+
+function carouselNavigationButtons() {
+    const window = document.querySelector('.carousel-window');
+
+    const buttonLeft = document.createElement('button');
+    buttonLeft.type = ButtonType.Button;
+    buttonLeft.classList.add('carousel-btn-prev');
+    const arrowLeft = document.createElement('i');
+    arrowLeft.classList.add('fa-solid', 'fa-arrow-down', 'fa-xl', 'fa-rotate-90');
+    buttonLeft.append(arrowLeft);
+
+    const buttonRight = document.createElement('button');
+    buttonRight.type = ButtonType.Button;
+    buttonRight.classList.add('carousel-btn-next');
+    const arrowRight = document.createElement('i');
+    arrowRight.classList.add('fa-solid', 'fa-arrow-down', 'fa-xl', 'fa-rotate-270');
+    buttonRight.append(arrowRight);
+
+    window.append(buttonLeft, buttonRight);
+}
+
 
 await init();

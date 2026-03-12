@@ -138,12 +138,47 @@ button {
     gap: var(--spacing-5);
 }
 
-.carousel {
-    gap: var(--spacing-4);
-    overflow-x: hidden;
+.carousel-window {
+    position: relative;
+    overflow: hidden;
     max-width: 90rem;
     margin: 0 auto;
     width: 100%;
+}
+
+.carousel {
+    gap: var(--spacing-4);
+    overflow-x: scroll;
+    scrollbar-width: none;
+    width: 100%;
+}
+
+/* Firefox scrollbar fix */
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-btn-prev,
+.carousel-btn-next {
+    position: absolute;
+    top: 50%;
+    background-color: var(--background);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 0.25rem solid black;
+    transform: translateY(-50%);
+}
+
+.carousel-btn-prev {
+    left: var(--spacing-3);
+}
+
+.carousel-btn-next {
+    right: var(--spacing-3);
 }
 
 .carousel-item {
@@ -157,6 +192,17 @@ button {
     height: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+.carousel-controls.button {
+    background-color: var(--background);
+    border-radius: 0.25rem;
+    color: var(--text-primary);
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
 }
 
 .product-info-wrapper {
