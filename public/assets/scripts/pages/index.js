@@ -7,7 +7,7 @@ async function init() {
         setTimeout(() => {
             const h1 = document.createElement('h1');
             h1.textContent = 'What We Offer';
-            document.querySelector('.products-carousel-wrapper').prepend(h1);
+            document.querySelector('.carousel-wrapper').prepend(h1);
             renderCarousel(products);
         }, 2000);
     } catch (error) {
@@ -16,12 +16,12 @@ async function init() {
 }
 
 function renderCarousel(products) {
-    const carousel = document.querySelector('.products-carousel');
+    const carousel = document.querySelector('.carousel');
     
     let carouselItems = [];
     for (let i = 0; i < products.length - 1; i++) {
         const carouselItem = document.createElement('a');
-        carouselItem.classList.add('product-carousel-item');
+        carouselItem.classList.add('carousel-item');
         carouselItem.href = new URL(`product.html?id=${products[i].id}`, window.location.href).toString();
         
         const image = document.createElement('img');
