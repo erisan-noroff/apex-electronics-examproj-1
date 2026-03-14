@@ -1,7 +1,10 @@
 @import './variables.css';
 
-*,*::before, *::after {
+*, *::before, *::after {
     box-sizing: border-box;
+}
+
+*:not(dialog) {
     margin: 0;
 }
 
@@ -115,8 +118,12 @@ a:hover {
 }
 
 button {
-    all: unset;
+    background: none;
+    border: none;
+    padding: 0;
     cursor: pointer;
+    font: inherit;
+    color: inherit;
 }
 
 .primary-button {
@@ -128,7 +135,17 @@ button {
     border-radius: 0.5rem;
 }
 
-.carousel, .products-grid {
+.carousel {
+    display: flex;
+    width: max-content;
+    transform: translateX(var(--offset, 0px));
+}
+
+.carousel.is-animating {
+    transition: 300ms ease;
+}
+
+.products-grid {
     display: flex;
     justify-content: center;
 }
@@ -146,45 +163,16 @@ button {
     width: 100%;
 }
 
-.carousel {
-    gap: var(--spacing-4);
-    overflow-x: scroll;
-    scrollbar-width: none;
+.carousel:has(.loading-state) {
     width: 100%;
-}
-
-/* Firefox scrollbar fix */
-.carousel::-webkit-scrollbar {
-    display: none;
-}
-
-.carousel-btn-prev,
-.carousel-btn-next {
-    position: absolute;
-    top: 50%;
-    background-color: var(--background);
-    width: 40px;
-    height: 40px;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    border: 0.25rem solid black;
-    transform: translateY(-50%);
-}
-
-.carousel-btn-prev {
-    left: var(--spacing-3);
-}
-
-.carousel-btn-next {
-    right: var(--spacing-3);
 }
 
 .carousel-item {
-    width: 25rem;
+    width: min(25rem, 80vw);
     aspect-ratio: 1 / 1;
     flex-shrink: 0;
+    margin-right: var(--spacing-4);
 }
 
 .carousel-item img {
@@ -194,15 +182,32 @@ button {
     object-position: center;
 }
 
-.carousel-controls.button {
-    background-color: var(--background);
-    border-radius: 0.25rem;
-    color: var(--text-primary);
-    z-index: 1;
+.carousel-btn-prev, .carousel-btn-next {
+    cursor: pointer;
     position: absolute;
     top: 50%;
-    left: 0;
-    right: 0;
+    z-index: 1;
+    background-color: var(--background);
+    color: var(--text-primary);
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 0.25rem solid var(--text-primary);
+    transform: translateY(-50%);
+}
+
+.carousel-btn-prev:hover, .carousel-btn-next:hover {
+    color: inherit;
+}
+
+.carousel-btn-prev {
+    left: var(--spacing-3); 
+}
+.carousel-btn-next {
+    right: var(--spacing-3); 
 }
 
 .product-info-wrapper {
@@ -497,5 +502,9 @@ button {
     .spinner {
         width: 5rem;
         height: 5rem;
+    }
+
+    .carousel-item {
+        width: 15.625rem;
     }
 }
