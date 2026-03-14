@@ -1,7 +1,10 @@
 @import './variables.css';
 
-*,*::before, *::after {
+*, *::before, *::after {
     box-sizing: border-box;
+}
+
+*:not(dialog) {
     margin: 0;
 }
 
@@ -115,8 +118,12 @@ a:hover {
 }
 
 button {
-    all: unset;
+    background: none;
+    border: none;
+    padding: 0;
     cursor: pointer;
+    font: inherit;
+    color: inherit;
 }
 
 .primary-button {
@@ -128,19 +135,89 @@ button {
     border-radius: 0.5rem;
 }
 
-.products-carousel, .products-grid {
+.carousel {
+    display: flex;
+    width: max-content;
+    transform: translateX(var(--offset, 0px));
+}
+
+.carousel.is-animating {
+    transition: 300ms ease;
+}
+
+.products-grid {
     display: flex;
     justify-content: center;
 }
 
-.product-info-container {
+.carousel-wrapper {
+    align-items: center;
+    gap: var(--spacing-5);
+}
+
+.carousel-window {
+    position: relative;
+    overflow: hidden;
+    max-width: 90rem;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.carousel:has(.loading-state) {
+    width: 100%;
+    justify-content: center;
+}
+
+.carousel-item {
+    width: min(25rem, 80vw);
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+    margin-right: var(--spacing-4);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.carousel-btn-prev, .carousel-btn-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    background-color: var(--background);
+    color: var(--text-primary);
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 0.25rem solid var(--text-primary);
+    transform: translateY(-50%);
+}
+
+.carousel-btn-prev:hover, .carousel-btn-next:hover {
+    color: inherit;
+}
+
+.carousel-btn-prev {
+    left: var(--spacing-3); 
+}
+.carousel-btn-next {
+    right: var(--spacing-3); 
+}
+
+.product-info-wrapper {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     gap: var(--spacing-7);
 }
 
-.product-info-container img {
+.product-info-wrapper img {
     width: 24.375rem;
     height: 24.375rem;
     object-fit: cover;
@@ -320,6 +397,7 @@ button {
     gap: var(--spacing-2);
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .spinner {
@@ -381,16 +459,16 @@ button {
         gap: var(--spacing-2);
     }
 
-    .product-info-container {
+    .product-info-wrapper {
         flex-direction: column;
         gap: 0;
     }
 
-    .product-info-container.loading-state {
+    .product-info-wrapper.loading-state {
         gap: var(--spacing-2);
     }
 
-    .product-info-container img {
+    .product-info-wrapper img {
         width: 15.625rem;
         height: 15.625rem;
     }
@@ -424,5 +502,9 @@ button {
     .spinner {
         width: 5rem;
         height: 5rem;
+    }
+
+    .carousel-item {
+        width: 15.625rem;
     }
 }

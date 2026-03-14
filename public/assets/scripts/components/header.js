@@ -4,8 +4,8 @@ headerTemplate.innerHTML = `
         <span class="logo">Apex Electronics</span>
         <nav class="desktop-menu">
             <ul>
-                <li><a href="/index.html">Products</a></li>
-                <li><a href="/login.html">Login</a></li>
+                <li><a href="index.html">Products</a></li>
+                <li><a href="login.html">Login</a></li>
                 <!-- Uncomment when Log In and Checkout is implemented -->
                 <!--<i class="fa-solid fa-cart-shopping"></i>-->
             </ul>
@@ -14,8 +14,8 @@ headerTemplate.innerHTML = `
             <i class="fa-solid fa-bars mobile-hamburger-button"></i>
         </button>
         <nav class="mobile-nav">
-            <a href="/index.html">Products</a>
-            <a href="/login.html">Login</a>
+            <a href="index.html">Products</a>
+            <a href="login.html">Login</a>
         </nav>
     </header>
 `;
