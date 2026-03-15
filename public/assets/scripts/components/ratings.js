@@ -16,11 +16,11 @@ export function createStarsElement(rating) {
 
 export function createRatingsElement(rating, reviews) {
     const reviewRow = document.createElement('div');
-    reviewRow.classList.add('review-row');
+    reviewRow.classList.add('product-review__row');
 
     const ratingsCount = document.createElement('p');
     ratingsCount.textContent = `${reviews.length} ${reviews.length === 1 ? 'review' : 'reviews'}`;
-    ratingsCount.classList.add('text-secondary');
+    ratingsCount.classList.add('ratings__count');
 
     reviewRow.appendChild(createStarsElement(rating));
     reviewRow.appendChild(ratingsCount);

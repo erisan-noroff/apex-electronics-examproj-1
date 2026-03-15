@@ -63,7 +63,7 @@ function renderProduct(product) {
     
     const description = document.createElement('p');
     description.textContent = product.description;
-    description.classList.add('text-secondary');
+    description.classList.add('product-description');
     productInfoContent.appendChild(description);
 
     const tags = productTagsElements(product.tags);
@@ -88,7 +88,7 @@ function productTagsElements(tags) {
     for (let i = 0; i < tags.length; i++) {
         const tag = document.createElement('span');
         tag.textContent = tags[i];
-        tag.classList.add('product-tag');
+        tag.classList.add('product-tags__tag');
         tagsElement.appendChild(tag);
     }
     
@@ -152,7 +152,7 @@ function renderProductReviews(rating, reviews) {
         reviewsSection.appendChild(reviewElement);
         
         const reviewRow = document.createElement('div');
-        reviewRow.classList.add('review-row');
+        reviewRow.classList.add('product-review__row');
         reviewElement.appendChild(reviewRow);
         
         const reviewer = document.createElement('p');

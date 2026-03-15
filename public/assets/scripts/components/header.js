@@ -11,7 +11,7 @@ headerTemplate.innerHTML = `
             </ul>
         </nav>
         <button id="toggle-mobile-menu" class="mobile-menu-toggle" aria-label="Menu" type="button">
-            <i class="fa-solid fa-bars mobile-hamburger-button"></i>
+            <i class="fa-solid fa-bars mobile-menu-toggle__icon"></i>
         </button>
         <nav class="mobile-nav">
             <a href="index.html">Products</a>
@@ -31,7 +31,7 @@ class HeaderComponent extends HTMLElement {
         const mobileNav = this.querySelector('.mobile-nav');
 
         btn.addEventListener('click', () => {
-            const isOpen = mobileNav.classList.toggle('open');
+            const isOpen = mobileNav.classList.toggle('mobile-nav--open');
             btn.setAttribute('aria-expanded', isOpen);
         });
     }
