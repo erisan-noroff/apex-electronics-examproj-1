@@ -37,4 +37,8 @@ I needed to add 4px to the spacing variables. I asked AI to update the existing 
 
 ### Product Carousel
 **14/03/2026**
-I needed guidance from AI with making the image carousel functional. This was complicated and not something that I have done before.When it was close to working and I was debugging it, but couldn't figure out why some images would not show up again until after having clicked the button X amount of times, then I had to chat with AI. 
+I needed guidance from AI with making the image carousel functional. This was complicated and not something that I have done before.When it was close to working and I was debugging it, but couldn't figure out why some images would not show up again until after having clicked the button X amount of times, then I had to chat with AI.
+
+### Other
+**15/03/2026**
+Asked AI to update classes in CSS and JS to use the Block, Element, Modifier (BEM) naming convention. Source: https://css-tricks.com/bem-101/.

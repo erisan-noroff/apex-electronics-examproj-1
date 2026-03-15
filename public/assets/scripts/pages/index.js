@@ -1,14 +1,17 @@
 import { getAllProducts } from '../api/productApi.js';
 import { ToastMessage } from '../components/toast-messages.js';
+import { createRatingsElement } from '../components/ratings.js';
+import { createPriceElement } from '../components/productPrice.js';
 
 async function init() {
     try {
         const products = await getAllProducts();
+
         setTimeout(() => {
-            const h1 = document.createElement('h1');
-            h1.textContent = 'What We Offer';
-            document.querySelector('.carousel-wrapper').prepend(h1);
-            renderCarousel(products);
+            const carouselWrapper = renderCarousel(products);
+            const gridSection = renderGrid(products);
+
+            document.querySelector('main').replaceChildren(carouselWrapper, gridSection);
         }, 2000);
     } catch (error) {
         ToastMessage.apiDataLoadError();
@@ -16,11 +19,22 @@ async function init() {
 }
 
 function renderCarousel(products) {
-    const carousel = document.querySelector('.carousel');
+    const h1 = document.createElement('h1');
+    h1.textContent = 'What We Offer';
+
+    const carouselWrapper = document.createElement('section');
+    carouselWrapper.classList.add('carousel-wrapper');
+    const carouselWindow = document.createElement('div');
+    carouselWindow.classList.add('carousel-window');
+    const carousel = document.createElement('div');
+    carousel.classList.add('carousel');
+    carouselWindow.appendChild(carousel);
+    carouselWrapper.append(h1, carouselWindow);
+
 
     const carouselItems = products.map((product) => {
         const item = document.createElement('a');
-        item.classList.add('carousel-item');
+        item.classList.add('carousel__item');
         item.href = new URL(`product.html?id=${product.id}`, window.location.href).toString();
 
         const image = document.createElement('img');
@@ -39,11 +53,54 @@ function renderCarousel(products) {
     products.forEach(p => { new Image().src = p.image.url; });
     carousel.replaceChildren(cloneSecondLast, cloneLast, ...carouselItems, cloneFirst, cloneSecond, cloneThird);
 
-    carouselNavigationButtons(carouselItems, carousel);
+    requestAnimationFrame(() => carouselNavigationButtons(carouselItems, carousel, carouselWindow));
+
+    return carouselWrapper;
 }
 
-function carouselNavigationButtons(items, carousel) {
-    const carouselWindow = document.querySelector('.carousel-window');
+function renderGrid(products) {
+    const section = document.createElement('section');
+    section.classList.add('grid-wrapper');
+    
+    const h2 = document.createElement('h2');
+    h2.textContent = 'Shop the Range';
+    section.append(h2);
+    
+    const divGrid = document.createElement('div');
+    divGrid.classList.add('grid');
+    section.append(divGrid);
+
+    
+    const cards = products.map((product) => {
+        console.log(product);
+        const card = document.createElement('div');
+        card.classList.add('product-card');
+        
+        const productUrl = document.createElement('a');
+        productUrl.href = new URL(`product.html?id=${product.id}`, window.location.href).toString();
+
+        const image = document.createElement('img');
+        image.src = product.image.url;
+        image.alt = product.image.alt;
+        productUrl.append(image);
+
+        const title = document.createElement('p');
+        title.classList.add('product-card__title');
+        title.textContent = product.title;
+        
+        const reviews = createRatingsElement(product.rating, product.reviews);
+        const price = createPriceElement(product.discountedPrice, product.price);
+
+        card.append(productUrl, title, reviews, price);
+        return card;
+    });
+
+    divGrid.append(...cards);
+
+    return section;
+}
+
+function carouselNavigationButtons(items, carousel, carouselWindow) {
     const count = items.length;
     let currentIndex = 0;
     let isAnimating = false;
@@ -54,7 +111,7 @@ function carouselNavigationButtons(items, carousel) {
     function goTo(domIndex, animate) {
         const step = getItemStep();
         const peekOffset = (carouselWindow.offsetWidth % step) / 2;
-        carousel.classList.toggle('is-animating', animate);
+        carousel.classList.toggle('carousel--animating', animate);
         if (!animate) void carousel.offsetWidth;
         carousel.style.setProperty('--offset', `${-(domIndex * step) + peekOffset}px`);
     }
@@ -66,22 +123,24 @@ function carouselNavigationButtons(items, carousel) {
             settled = true;
             callback();
         };
-        
+
         const handler = (e) => {
             if (e.propertyName !== 'transform') return;
             carousel.removeEventListener('transitionend', handler);
             settle();
         };
-        
+
         carousel.addEventListener('transitionend', handler);
         setTimeout(settle, 300);
     }
 
     goTo(2, false);
 
+    window.addEventListener('resize', () => goTo(currentIndex + 2, false));
+
     function createNavigationButton(rotation, classNameSuffix) {
         const button = document.createElement('button');
-        button.classList.add(`carousel-btn-${classNameSuffix}`);
+        button.classList.add(`carousel__btn--${classNameSuffix}`);
         const arrow = document.createElement('i');
         arrow.classList.add('fa-solid', 'fa-arrow-down', 'fa-lg', `fa-rotate-${rotation}`);
         button.append(arrow);
@@ -105,7 +164,7 @@ function carouselNavigationButtons(items, carousel) {
             });
             return;
         }
-        
+
         currentIndex--;
         goTo(currentIndex + 2, true);
         onTransitionEnd(() => { isAnimating = false; });
@@ -124,12 +183,11 @@ function carouselNavigationButtons(items, carousel) {
             });
             return;
         }
-        
+
         currentIndex++;
         goTo(currentIndex + 2, true);
         onTransitionEnd(() => { isAnimating = false; });
     });
 }
-
 
 await init();

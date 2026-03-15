@@ -3,6 +3,7 @@ import { ToastMessage } from '../components/toast-messages.js';
 import { createRatingsElement, createStarsElement } from '../components/ratings.js';
 import { PrimaryButton } from '../components/buttons.js';
 import { isAuthenticated } from '../utils/authentication.js';
+import { createPriceElement } from '../components/productPrice.js';
 
 const main = document.querySelector('main');
 async function init() {
@@ -63,7 +64,7 @@ function renderProduct(product) {
     
     const description = document.createElement('p');
     description.textContent = product.description;
-    description.classList.add('text-secondary');
+    description.classList.add('product-description');
     productInfoContent.appendChild(description);
 
     const tags = productTagsElements(product.tags);
@@ -88,7 +89,7 @@ function productTagsElements(tags) {
     for (let i = 0; i < tags.length; i++) {
         const tag = document.createElement('span');
         tag.textContent = tags[i];
-        tag.classList.add('product-tag');
+        tag.classList.add('product-tags__tag');
         tagsElement.appendChild(tag);
     }
     
@@ -152,7 +153,7 @@ function renderProductReviews(rating, reviews) {
         reviewsSection.appendChild(reviewElement);
         
         const reviewRow = document.createElement('div');
-        reviewRow.classList.add('review-row');
+        reviewRow.classList.add('product-review__row');
         reviewElement.appendChild(reviewRow);
         
         const reviewer = document.createElement('p');
@@ -166,22 +167,6 @@ function renderProductReviews(rating, reviews) {
         comment.textContent = reviews[i].description;
         reviewsSection.appendChild(comment);
     }
-}
-
-function createPriceElement(discountedPrice, price) {
-    const priceElement = document.createElement('p');
-    if (discountedPrice < price) {
-        const discountedPriceElement = document.createElement('span');
-        discountedPriceElement.textContent = `${discountedPrice},- `;
-        discountedPriceElement.classList.add('discounted-price');
-        const originalPriceElement = document.createElement('span');
-        originalPriceElement.textContent = `${price}`;
-        originalPriceElement.classList.add('original-price');
-        priceElement.appendChild(discountedPriceElement);
-        priceElement.appendChild(originalPriceElement);
-    } else priceElement.textContent = `${price},-`;
-    
-    return priceElement;
 }
 
 await init();

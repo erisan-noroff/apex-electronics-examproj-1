@@ -47,15 +47,15 @@ function displayToast(type, title, message) {
     main.prepend(toastContainer);
     
     const toastIndicator = document.createElement('span');
-    toastIndicator.classList.add('toast-indicator', `${TOAST_TYPES[type].id}`);
+    toastIndicator.classList.add('toast__indicator', `${TOAST_TYPES[type].id}`);
     toastContainer.append(toastIndicator);
-    
+
     const toastContent = document.createElement('div');
-    toastContent.classList.add('toast-content');
+    toastContent.classList.add('toast__content');
     toastContainer.append(toastContent);
-    
+
     const toastIconContainer = document.createElement('span');
-    toastIconContainer.classList.add('toast-icon', `${TOAST_TYPES[type].id}`);
+    toastIconContainer.classList.add('toast__icon', `${TOAST_TYPES[type].id}`);
     
     const toastIcon = document.createElement('i');
     toastIcon.className = TOAST_TYPES[type].icon;
@@ -63,16 +63,16 @@ function displayToast(type, title, message) {
     toastContent.append(toastIconContainer);
     
     const toastText = document.createElement('div');
-    toastText.classList.add('toast-text');
+    toastText.classList.add('toast__text');
     toastContent.append(toastText);
 
     const toastTitle = document.createElement('p');
-    toastTitle.classList.add('text-semibold');
+    toastTitle.classList.add('toast__title');
     toastTitle.innerText = title;
     toastText.append(toastTitle);
 
     const toastMessage = document.createElement('p');
-    toastMessage.classList.add('text-secondary');
+    toastMessage.classList.add('toast__message');
     toastMessage.innerText = message;
     toastText.append(toastMessage);
     
