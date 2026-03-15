@@ -3,6 +3,7 @@ import { ToastMessage } from '../components/toast-messages.js';
 import { createRatingsElement, createStarsElement } from '../components/ratings.js';
 import { PrimaryButton } from '../components/buttons.js';
 import { isAuthenticated } from '../utils/authentication.js';
+import { createPriceElement } from '../components/productPrice.js';
 
 const main = document.querySelector('main');
 async function init() {
@@ -166,22 +167,6 @@ function renderProductReviews(rating, reviews) {
         comment.textContent = reviews[i].description;
         reviewsSection.appendChild(comment);
     }
-}
-
-function createPriceElement(discountedPrice, price) {
-    const priceElement = document.createElement('p');
-    if (discountedPrice < price) {
-        const discountedPriceElement = document.createElement('span');
-        discountedPriceElement.textContent = `${discountedPrice},- `;
-        discountedPriceElement.classList.add('discounted-price');
-        const originalPriceElement = document.createElement('span');
-        originalPriceElement.textContent = `${price}`;
-        originalPriceElement.classList.add('original-price');
-        priceElement.appendChild(discountedPriceElement);
-        priceElement.appendChild(originalPriceElement);
-    } else priceElement.textContent = `${price},-`;
-    
-    return priceElement;
 }
 
 await init();
