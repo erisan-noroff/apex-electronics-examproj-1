@@ -1,7 +1,7 @@
 const headerTemplate = document.createElement('template');
 headerTemplate.innerHTML = `
     <header>
-        <span class="logo">Apex Electronics</span>
+        <a href="index.html"><span class="logo">Apex Electronics</span></a>
         <nav class="desktop-menu">
             <ul>
                 <li><a href="index.html">Products</a></li>
