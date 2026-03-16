@@ -72,11 +72,8 @@ function renderProduct(product) {
     
     if (product.reviews.length > 0) renderProductReviews(product.rating, product.reviews);
     
-    if (!isAuthenticated())
-    {
-        const button = addToCart();
-        productInfoContent.appendChild(button);
-    }
+    const button = addToCart();
+    productInfoContent.appendChild(button);
     
     const share = shareLinkElement(product.id);
     productInfoContent.appendChild(share);
