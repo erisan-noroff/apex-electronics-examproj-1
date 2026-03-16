@@ -6,8 +6,8 @@ headerTemplate.innerHTML = `
             <ul>
                 <li><a href="index.html">Products</a></li>
                 <li><a href="login.html">Login</a></li>
-                <!-- Uncomment when Log In and Checkout is implemented -->
-                <!--<i class="fa-solid fa-cart-shopping"></i>-->
+                <!-- Non-functional/not yet implemeneted. -->
+                <li class="fa-solid fa-cart-shopping"></li>
             </ul>
         </nav>
         <button id="toggle-mobile-menu" class="mobile-menu-toggle" aria-label="Menu" type="button">
