@@ -14,6 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100dvh;
+    color: var(--text-primary);
 }
 
 main {
@@ -64,6 +65,7 @@ nav ul {
 
 a {
     text-decoration: none;
+    color: var(--primary-blue);
 }
 
 p {
@@ -206,7 +208,6 @@ button {
     top: 50%;
     z-index: 1;
     background-color: var(--background);
-    color: var(--text-primary);
     width: 2.5rem;
     height: 2.5rem;
     display: flex;
@@ -228,30 +229,30 @@ button {
     right: var(--spacing-3);
 }
 
-.product-info-wrapper {
+.product-info {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     gap: var(--spacing-7);
 }
 
-.product-info-wrapper img {
+.product-info img {
     width: 24.375rem;
     height: 24.375rem;
     object-fit: cover;
 }
 
-.product-info-content {
+.product-info__content {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-3);
 }
 
-.product-info-content h1 {
+.product-info__content h1 {
     margin-top: 1rem;
 }
 
-.product-info-price-ratings {
+.product-info__price-ratings {
     display: flex;
     gap: var(--spacing-2);
 }
@@ -313,8 +314,7 @@ button {
 
 .cart-icon,
 .mobile-menu-toggle__icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    font-size: 1.5rem;
     color: var(--primary-blue);
 }
 
@@ -337,7 +337,7 @@ button {
     padding: var(--spacing-2) var(--spacing-2) var(--spacing-2) 0;
 }
 
-.toast-container {
+.toast-wrapper {
     display: flex;
     width: 22rem;
     height: 5rem;
@@ -352,11 +352,11 @@ button {
     height: 5rem;
 }
 
-.toast-success {
+.toast--success {
     background-color: var(--success);
 }
 
-.toast-error {
+.toast--error {
     background-color: var(--error);
 }
 
@@ -371,11 +371,11 @@ button {
     flex-shrink: 0;
 }
 
-.toast__icon.toast-success {
+.toast__icon.toast--success {
     background-color: var(--success);
 }
 
-.toast__icon.toast-error {
+.toast__icon.toast--error {
     background-color: var(--error);
 }
 
@@ -395,7 +395,7 @@ button {
     color: var(--text-secondary);
 }
 
-.toast-container > button {
+.toast-wrapper > button {
     all: unset;
     cursor: pointer;
     position: absolute;
@@ -422,6 +422,71 @@ button {
     animation: spin 1s linear infinite;
 }
 
+.signin-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-4);
+    width: 30rem;
+    border: 1px solid var(--border);
+    padding: var(--spacing-4);
+}
+
+.form-card__row {
+    display: flex;
+    gap: var(--spacing-2);
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form-card__inline {
+    display: flex;
+    gap: var(--spacing-1);
+    align-items: center;
+}
+
+.form-card__forgot-password {
+    color: var(--primary-blue);
+}
+
+.form-card .primary-button {
+    width: 100%;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+    width: 100%;
+}
+
+input:not([type="checkbox"]) {
+    padding: var(--spacing-2);
+    background-color: var(--card-background);
+    border: 1px solid var(--border);
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+.input-wrapper__label {
+    font-weight: 600;
+}
+
+input.input-wrapper__input--error {
+    border: 1px solid var(--error);
+}
+
+.input-wrapper__error {
+    color: var(--error);
+}
+
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
@@ -438,6 +503,10 @@ button {
 }
 
 @media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    
     header {
         padding: var(--spacing-2);
     }
@@ -479,20 +548,20 @@ button {
         font-size: 0.875rem;
     }
     
-    .product-info-content {
+    .product-info__content {
         gap: var(--spacing-2);
     }
 
-    .product-info-wrapper {
+    .product-info {
         flex-direction: column;
         gap: 0;
     }
 
-    .product-info-wrapper.loading-state {
+    .product-info.loading-state {
         gap: var(--spacing-2);
     }
 
-    .product-info-wrapper img {
+    .product-info img {
         width: 15.625rem;
         height: 15.625rem;
     }
@@ -518,7 +587,7 @@ button {
         padding-top: var(--spacing-2);
     }
 
-    .toast-container {
+    .toast-wrapper {
         top: var(--spacing-7);
         right: 0;
     }

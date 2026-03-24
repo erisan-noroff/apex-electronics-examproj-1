@@ -1,8 +1,7 @@
 import { getProductById } from '../api/productApi.js';
 import { ToastMessage } from '../components/toast-messages.js';
 import { createRatingsElement, createStarsElement } from '../components/ratings.js';
-import { PrimaryButton } from '../components/buttons.js';
-import { isAuthenticated } from '../utils/authentication.js';
+import { Button } from '../components/buttons.js';
 import { createPriceElement } from '../components/productPrice.js';
 
 const main = document.querySelector('main');
@@ -37,7 +36,7 @@ function renderNotFound() {
 
 function renderProduct(product) {
     const section = document.createElement('section');
-    section.classList.add('product-info-wrapper');
+    section.classList.add('product-info');
     
     const image = document.createElement('img');
     image.src = product.image.url;
@@ -45,7 +44,7 @@ function renderProduct(product) {
     section.appendChild(image);
     
     const productInfoContent = document.createElement('div');
-    productInfoContent.classList.add('product-info-content');
+    productInfoContent.classList.add('product-info__content');
     section.appendChild(productInfoContent);
     
     const productName = document.createElement('h1');
@@ -53,7 +52,7 @@ function renderProduct(product) {
     productInfoContent.appendChild(productName);
     
     const productInfoPriceRatings = document.createElement('div');
-    productInfoPriceRatings.classList.add('product-info-price-ratings');
+    productInfoPriceRatings.classList.add('product-info__price-ratings');
     const price = createPriceElement(product.discountedPrice, product.price);
     productInfoPriceRatings.appendChild(price);
     productInfoContent.appendChild(productInfoPriceRatings);
@@ -94,7 +93,7 @@ function productTagsElements(tags) {
 }
 
 function addToCart() {
-    const button = PrimaryButton('Add to Cart', 'button', 'add-to-cart');
+    const button = Button('Add to Cart', 'primary-button');
     
     button.addEventListener('click', () => {
         ToastMessage.success('Added to cart', 'Product has been added to your cart');
@@ -104,8 +103,7 @@ function addToCart() {
 }
 
 function shareLinkElement(productId) {
-    const share = document.createElement('button');
-    share.classList.add('share-link');
+    const share = Button('Share', 'share-link');
     const titleAndAriaLabel = 'Copy product link to clipboard';
     share.setAttribute('aria-label', titleAndAriaLabel);
     share.title = titleAndAriaLabel;

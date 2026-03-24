@@ -5,9 +5,9 @@ headerTemplate.innerHTML = `
         <nav class="desktop-menu">
             <ul>
                 <li><a href="index.html">Products</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="signin.html">Login</a></li>
                 <!-- Non-functional/not yet implemeneted. -->
-                <li class="fa-solid fa-cart-shopping"></li>
+                <li><i class="fa-solid fa-cart-shopping"></i></li>
             </ul>
         </nav>
         <button id="toggle-mobile-menu" class="mobile-menu-toggle" aria-label="Menu" type="button">
@@ -15,7 +15,7 @@ headerTemplate.innerHTML = `
         </button>
         <nav class="mobile-nav">
             <a href="index.html">Products</a>
-            <a href="login.html">Login</a>
+            <a href="signin.html">Login</a>
         </nav>
     </header>
 `;
