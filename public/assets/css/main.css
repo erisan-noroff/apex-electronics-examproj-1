@@ -340,7 +340,7 @@ button {
 .toast-wrapper {
     display: flex;
     width: 22rem;
-    height: 5rem;
+    min-height: 5rem;
     z-index: 1;
     background-color: var(--card-background);
     position: absolute;
@@ -349,7 +349,8 @@ button {
 
 .toast__indicator {
     width: 0.5rem;
-    height: 5rem;
+    align-self: stretch;
+    flex-shrink: 0;
 }
 
 .toast--success {
@@ -588,6 +589,7 @@ input.input-wrapper__input--error {
     }
 
     .toast-wrapper {
+        width: 100%;
         top: var(--spacing-7);
         right: 0;
     }
