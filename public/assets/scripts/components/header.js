@@ -1,3 +1,5 @@
+import { isAuthenticated } from '../utils/authentication.js';
+
 const headerTemplate = document.createElement('template');
 headerTemplate.innerHTML = `
     <header>
@@ -5,7 +7,7 @@ headerTemplate.innerHTML = `
         <nav class="desktop-menu">
             <ul>
                 <li><a href="index.html">Products</a></li>
-                <li><a href="signin.html">Login</a></li>
+                ${!isAuthenticated() ? '<li><a href="signin.html">Login</a></li>' : ''}
                 <!-- Non-functional/not yet implemeneted. -->
                 <li><i class="fa-solid fa-cart-shopping"></i></li>
             </ul>
@@ -15,7 +17,9 @@ headerTemplate.innerHTML = `
         </button>
         <nav class="mobile-nav">
             <a href="index.html">Products</a>
-            <a href="signin.html">Login</a>
+            ${!isAuthenticated() ? '<a href="signin.html">Login</a>' : ''}
+            <!-- Non-functional/not yet implemented. -->
+            <a href="#"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
         </nav>
     </header>
 `;

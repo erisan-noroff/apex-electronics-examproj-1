@@ -2,13 +2,13 @@ const TOAST_TYPES = {
     success: {
         id: 'toast-success',
         modifier: 'toast--success',
-        icon: 'fa-solid fa-check fa-sm',
+        icon: 'fa-solid fa-check',
         altText: 'success alert'
     },
     error: {
         id: 'toast-error',
         modifier: 'toast--error',
-        icon: 'fa-solid fa-xmark fa-sm',
+        icon: 'fa-solid fa-xmark',
         altText: 'error alert'
     }
 }
@@ -100,6 +100,6 @@ function addCloseBtnEventListener(type) {
     }
 }
 
-function removeToastIfAlreadyiExsts(type) {
-    document.getElementById(type)?.remove();
+function removeToastIfAlreadyiExsts() {
+    Object.values(TOAST_TYPES).forEach(({ id }) => document.getElementById(id)?.remove());
 }

@@ -1,6 +1,6 @@
 /**
  * Validates form inputs and marks invalid fields
- * @param {SubmitEvent} event - Form submit event
+ * @param {Event} event - Form submit event
  * @returns {boolean} True if all inputs are valid
 */
 export default function formValidation(event) {
