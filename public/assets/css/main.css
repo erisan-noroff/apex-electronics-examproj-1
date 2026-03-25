@@ -44,7 +44,7 @@ header {
     justify-content: space-between;
     padding: var(--spacing-3) var(--spacing-4);
     border-bottom: 1px solid var(--border);
-    align-items: flex-start;
+    align-items: center;
 }
 
 footer {
@@ -368,6 +368,8 @@ button {
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 50%;
+    overflow: hidden;
+    font-size: 0.75rem;
     color: var(--background);
     flex-shrink: 0;
 }
@@ -520,6 +522,7 @@ input.input-wrapper__input--error {
     .desktop-menu {
         display: none;
     }
+
 
     .mobile-menu-toggle {
         display: block;
