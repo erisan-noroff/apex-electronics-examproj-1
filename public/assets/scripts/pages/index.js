@@ -72,7 +72,6 @@ function renderGrid(products) {
 
     
     const cards = products.map((product) => {
-        console.log(product);
         const card = document.createElement('div');
         card.classList.add('product-card');
         

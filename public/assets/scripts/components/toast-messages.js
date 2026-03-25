@@ -1,11 +1,13 @@
 const TOAST_TYPES = {
     success: {
         id: 'toast-success',
+        modifier: 'toast--success',
         icon: 'fa-solid fa-check fa-sm',
         altText: 'success alert'
     },
     error: {
         id: 'toast-error',
+        modifier: 'toast--error',
         icon: 'fa-solid fa-xmark fa-sm',
         altText: 'error alert'
     }
@@ -42,12 +44,12 @@ function displayToast(type, title, message) {
     
     const main = document.querySelector('main');
     const toastContainer = document.createElement('div');
-    toastContainer.classList.add('toast-container');
+    toastContainer.classList.add('toast-wrapper');
     toastContainer.id = TOAST_TYPES[type].id;
     main.prepend(toastContainer);
     
     const toastIndicator = document.createElement('span');
-    toastIndicator.classList.add('toast__indicator', `${TOAST_TYPES[type].id}`);
+    toastIndicator.classList.add('toast__indicator', `${TOAST_TYPES[type].modifier}`);
     toastContainer.append(toastIndicator);
 
     const toastContent = document.createElement('div');
@@ -55,7 +57,7 @@ function displayToast(type, title, message) {
     toastContainer.append(toastContent);
 
     const toastIconContainer = document.createElement('span');
-    toastIconContainer.classList.add('toast__icon', `${TOAST_TYPES[type].id}`);
+    toastIconContainer.classList.add('toast__icon', `${TOAST_TYPES[type].modifier}`);
     
     const toastIcon = document.createElement('i');
     toastIcon.className = TOAST_TYPES[type].icon;

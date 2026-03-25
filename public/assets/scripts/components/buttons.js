@@ -9,16 +9,16 @@ export const ButtonType = {
 /**
  * Primary button
  * @param {string} text - Button text
- * @param {('button'|'submit'|'reset')} [type=ButtonType.Button] - Button type (button, submit)
+ * @param {string} [className=''] - Class name to be added
  * @param {string} [idPrefix=''] - ID prefix for button (will append '-btn')
+ * @param {('button'|'submit'|'reset')} [type=ButtonType.Button] - Button type (button, submit)
  * @returns {HTMLButtonElement} - HTML button element
  */
-export function PrimaryButton(text, type = ButtonType.Button, idPrefix = '') {
-    const idAttr = idPrefix ? `id="${idPrefix}-btn"` : '';
+export function Button(text, className = '', idPrefix='', type = ButtonType.Button) {
     const button = document.createElement('button');
     button.type = type;
-    button.classList.add('primary-button');
-    if (idAttr) button.id = `${idPrefix}-btn`;
+    if (className) button.classList.add(className);
+    if (idPrefix) button.id = `${idPrefix}-btn`;
     button.textContent = text;
     return button;
 }

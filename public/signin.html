@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Sign in to your Apex Electronics account to place orders.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Electronics</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script type="text/javascript" src="assets/scripts/components/header.js" defer></script>
+    <script type="text/javascript" src="assets/scripts/components/footer.js" defer></script>
+    <script type="module" src="assets/scripts/pages/signin.js"></script>
+</head>
+<body>
+    <header-component></header-component>
+    <main>
+        <div class="signin-wrapper">
+            <form class="form-card">
+                <h1>Sign In</h1>
+                <p>Enter your credentials to sign in</p>
+                <div class="input-wrapper">
+                    <label for="email" class="input-wrapper__label">Email</label>
+                    <input id="email" type="text" autocomplete="email" required />
+                </div>
+                <div class="input-wrapper">
+                    <label for="password" class="input-wrapper__label">Password</label>
+                    <input id="password" type="password" autocomplete="password" required />
+                </div>
+                <div class="form-card__row">
+                    <div>
+                        <input id="remember-me" type="checkbox" />
+                        <label for="remember-me">Remember me</label>
+                    </div>
+                </div>
+                <div class="form-card__inline">
+                    <p>Not registered yet?</p>
+                    <a href="#">Create an account</a>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer-component></footer-component>
+</body>
+</html>
