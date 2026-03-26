@@ -5,14 +5,12 @@
 */
 export default function formValidation(event) {
     event.preventDefault();
-    const form = event.target;
     let isValid = true;
 
-    for (let i = 0; i < form.elements.length; i++) {
-        const input = form.elements[i];
-        if (['text', 'email', 'password'].includes(input.type)) {
-            input.value.trim() === '' ? markInputAsInvalid(input) : markInputAsValid(input);
-        }
+    const requiredInputs = event.target.querySelectorAll('[required]');
+    for (let i = 0; i < requiredInputs.length; i++) {
+        const input = requiredInputs[i];
+        input.value.trim() === '' ? markInputAsInvalid(input) : markInputAsValid(input);
     }
 
     function markInputAsInvalid(input) {
