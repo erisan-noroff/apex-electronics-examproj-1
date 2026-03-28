@@ -1,7 +1,7 @@
 import { Button, ButtonType } from '../components/buttons.js';
 import { ToastMessage } from '../components/toast-messages.js';
 import formValidation from '../utils/form-validation.js';
-import { isAuthenticated, setAuthToken } from '../utils/authentication.js';
+import { isAuthenticated, authApiClient } from '../utils/authentication.js';
 
 const homePage = new URL('index.html', window.location.href).toString();
 function init() {
@@ -20,10 +20,21 @@ function signInButton() {
         const signInButton = Button('Sign In', 'primary-button', 'sign-in', ButtonType.Submit);
         formCard.insertBefore(signInButton, formCard.lastElementChild);
         
-        formCard.addEventListener('submit', (e) => {
+        formCard.addEventListener('submit', async(e) => {
             const isValid = formValidation(e);
             if (!isValid) return;
-            setAuthToken();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const response = await authApiClient('login', { email, password });
+            if (!response) ToastMessage.apiDataLoadError();
+            
+            const data = await response.json();
+            if (!response.ok) ToastMessage.error('Login failed', data.errors[0].message);
+            
+            const accessToken = data.data.accessToken;
+            if (!accessToken) ToastMessage.error('Unexpected server error', 'No authentication token received');
+            
+            localStorage.setItem('auth_token', data.data.accessToken);
             window.location.href = homePage;
         });
     }
