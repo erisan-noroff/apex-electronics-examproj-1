@@ -45,3 +45,6 @@ I needed guidance from AI with making the image carousel functional. This was co
 ### Other
 **15/03/2026**
 Asked AI to update classes in CSS and JS to use the Block, Element, Modifier (BEM) naming convention. Source: https://css-tricks.com/bem-101/.
+
+**28/03/2026**
+AI generated workflow for publishing to GitHub Pages. Using a repository secret to inject the API key.

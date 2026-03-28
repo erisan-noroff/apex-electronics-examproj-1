@@ -1,18 +1,30 @@
+import { API_KEY } from './config.js';
+
+/**
+ * Checks whether the user is currently authenticated.
+ * @returns {boolean} True if a valid auth token exists in localStorage.
+ */
 export function isAuthenticated() {
     const token = localStorage.getItem('auth_token');
-    return token !== null && token !== '';
+    return !!token;
 }
 
-export function setAuthToken() {
-    // Reference: https://stackoverflow.com/questions/1349404/generate-a-string-of-random-characters
-    const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let token = '';
-    for (let i = 0; i < charset.length; i++)
-        token += charset.charAt(Math.floor(Math.random() * charset.length));
+/**
+ * Sends a POST request to the Noroff auth API.
+ * @param {string} endpoint - The auth endpoint to call ("login" or "register").
+ * @param {object} body - The request payload.
+ * @returns {Promise<Response>} The raw fetch Response.
+ */
+export async function authApiClient(endpoint, body) {
+    const baseApiUrl = 'https://v2.api.noroff.dev/auth';
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Noroff-API-Key': `${API_KEY}`
+        },
+        body: JSON.stringify(body)
+    };
     
-    localStorage.setItem('auth_token', token);
-}
-
-export function clearToken() {
-    localStorage.removeItem('auth_token');
+    return await fetch(`${baseApiUrl}/${endpoint}`, options);
 }
