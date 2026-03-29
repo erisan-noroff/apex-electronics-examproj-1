@@ -343,7 +343,7 @@ button {
     min-height: 5rem;
     z-index: 1;
     background-color: var(--card-background);
-    position: absolute;
+    position: fixed;
     right: 0;
 }
 
@@ -425,7 +425,7 @@ button {
     animation: spin 1s linear infinite;
 }
 
-.signin-wrapper {
+.signin-wrapper, .signup-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
