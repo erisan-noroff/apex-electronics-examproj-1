@@ -52,3 +52,6 @@ Asked AI to update classes in CSS and JS to use the Block, Element, Modifier (BE
 
 **28/03/2026**
 AI generated workflow for publishing to GitHub Pages. Using a repository secret to inject the API key.
+
+**12/04/2026**
+Needed suggestions from AI on what to name the label the pure white (#FFF) colour as in the Design_Specifications.md file. The file was a little out of date.
