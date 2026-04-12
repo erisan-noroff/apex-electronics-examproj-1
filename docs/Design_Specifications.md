@@ -3,9 +3,7 @@ All developers must adhere to these design specifications when implementing the 
 
 ## Colour Palette
 ### Primary Blue
-- **Default:** #2563EB
-- **Hover:** #1E40AF
-- **Active:** #1E3A8A
+- **Colour:** #2563EB
 - **Usage:** Logo, navigation links, hyperlinks, primary buttons
 ### Body Text
 #### Primary
@@ -13,20 +11,39 @@ All developers must adhere to these design specifications when implementing the 
 - **Usage:** Headings, product titles, body text, prices
 #### Secondary
 - **Colour:** #6B7280
-- **Usage:** Descriptions, placeholders, original prices (when discounted)
+- **Usage:** Descriptions, placeholders, original prices (when discounted), utility actions
+### Danger
+- **Colour:** #DC2626
+- **Usage:** Error messages pop-up, "Remove from Cart" buttons
 ### Discounted Prices
 **Colour:** #15803D
 ### Borders
 **Colour:** #E5E7EB
 ### Background
 **Colour:** #F9FAFB
-### Card Background
-**Colour:** #FFFFFF
 ### Footer
 **Background Colour:** Body Text Primary
-**Text Colour:** Background
+**Text Colour:** Surface
+### Success
+- **Colour:** #16A34A
+- **Usage:** Success messages pop-up
+### Surface
+- **Colour:** #FFFFFF
+- **Usage:** Cards, ghost buttons, footer text
 ### Star Icons (ratings)
 **Colour:** #FBBF24
+#### Primary Button
+- **Default:** Surface, Text: Surface
+- **Hover:** #1E40AF, Text: Surface
+- **Active:** #1E3A8A, Text: Surface
+#### Danger Button
+- **Default:** Danger, Text: Surface
+- **Hover:** #B91C1C, Text: Surface
+- **Active:** #991B1B, Text: Surface
+#### Ghost Button
+- **Default:** Surface, Border: Borders, Text: Body Secondary
+- **Hover:** #E5E7EB, Border: Body Primary, Text: Body Primary
+- **Active:** #D1D5DB, Border: Body Primary, Text: Body Primary
 ***
 
 ## Typography
