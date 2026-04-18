@@ -4,7 +4,7 @@ All developers must adhere to these design specifications when implementing the 
 ## Colour Palette
 ### Primary Blue
 - **Colour:** #2563EB
-- **Usage:** Logo, navigation links, hyperlinks, primary buttons
+- **Usage:** Logo, navigation, hyperlinks, primary buttons
 ### Body Text
 #### Primary
 - **Colour:** #1F2937
@@ -15,8 +15,6 @@ All developers must adhere to these design specifications when implementing the 
 ### Danger
 - **Colour:** #DC2626
 - **Usage:** Error messages pop-up, "Remove from Cart" buttons
-### Discounted Prices
-**Colour:** #15803D
 ### Borders
 **Colour:** #E5E7EB
 ### Background
