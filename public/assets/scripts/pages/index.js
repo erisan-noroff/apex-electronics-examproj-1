@@ -137,17 +137,18 @@ function carouselNavigationButtons(items, carousel, carouselWindow) {
 
     window.addEventListener('resize', () => goTo(currentIndex + 2, false));
 
-    function createNavigationButton(rotation, classNameSuffix) {
+    function createNavigationButton(iconName, classNameSuffix) {
         const button = document.createElement('button');
         button.classList.add(`carousel__btn--${classNameSuffix}`);
-        const arrow = document.createElement('i');
-        arrow.classList.add('fa-solid', 'fa-arrow-down', 'fa-lg', `fa-rotate-${rotation}`);
+        const arrow = document.createElement('span');
+        arrow.className = 'material-icons';
+        arrow.textContent = iconName;
         button.append(arrow);
         return button;
     }
 
-    const buttonLeft = createNavigationButton(90, 'prev');
-    const buttonRight = createNavigationButton(270, 'next');
+    const buttonLeft = createNavigationButton('arrow_back', 'prev');
+    const buttonRight = createNavigationButton('arrow_forward', 'next');
     carouselWindow.append(buttonLeft, buttonRight);
 
     buttonLeft.addEventListener('click', (e) => {

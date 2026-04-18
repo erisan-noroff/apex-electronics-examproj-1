@@ -15,7 +15,7 @@ async function init() {
 
 function signUpButton() {
     if (formCard) {
-        const signUpButton = Button('Sign Up', 'primary-button', 'sign-up', ButtonType.Submit);
+        const signUpButton = Button('Sign Up', 'primary-btn', 'sign-up', ButtonType.Submit);
         formCard.append(signUpButton);
 
         formCard.addEventListener('submit', async (e) => {
@@ -43,7 +43,7 @@ function signUpSuccess() {
         signupSuccessH1.textContent = 'Registration Successful!';
         const signupSuccessBody = document.createElement('p');
         signupSuccessBody.textContent = "We've sent a confirmation email.\nClick the link to activate your account.";
-        const exploreShopButton = Button('Sign in to start shopping', 'primary-button');
+        const exploreShopButton = Button('Sign in to start shopping', 'primary-btn');
         formCard.replaceChildren(signupSuccessH1, signupSuccessBody, exploreShopButton);
         
         exploreShopButton.addEventListener('click', (e) => {

@@ -93,7 +93,7 @@ function productTagsElements(tags) {
 }
 
 function addToCart() {
-    const button = Button('Add to Cart', 'primary-button');
+    const button = Button('Add to Cart', 'primary-btn');
     
     button.addEventListener('click', () => {
         ToastMessage.success('Added to cart', 'Product has been added to your cart');
@@ -108,8 +108,9 @@ function shareLinkElement(productId) {
     share.setAttribute('aria-label', titleAndAriaLabel);
     share.title = titleAndAriaLabel;
 
-    const shareIcon = document.createElement('i');
-    shareIcon.classList.add('fa-solid', 'fa-link');
+    const shareIcon = document.createElement('span');
+    shareIcon.className = 'material-icons';
+    shareIcon.textContent = 'link';
     share.prepend(shareIcon);
 
     const shareText = share.lastChild;
