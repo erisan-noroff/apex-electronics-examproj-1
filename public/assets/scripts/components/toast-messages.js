@@ -2,13 +2,13 @@ const TOAST_TYPES = {
     success: {
         id: 'toast-success',
         modifier: 'toast--success',
-        icon: 'fa-solid fa-check',
+        icon: 'check',
         altText: 'success alert'
     },
     error: {
         id: 'toast-error',
         modifier: 'toast--error',
-        icon: 'fa-solid fa-xmark',
+        icon: 'close',
         altText: 'error alert'
     }
 }
@@ -59,8 +59,9 @@ function displayToast(type, title, message) {
     const toastIconContainer = document.createElement('span');
     toastIconContainer.classList.add('toast__icon', `${TOAST_TYPES[type].modifier}`);
     
-    const toastIcon = document.createElement('i');
-    toastIcon.className = TOAST_TYPES[type].icon;
+    const toastIcon = document.createElement('span');
+    toastIcon.className = 'material-icons';
+    toastIcon.textContent = TOAST_TYPES[type].icon;
     toastIconContainer.append(toastIcon);
     toastContent.append(toastIconContainer);
     
@@ -81,8 +82,9 @@ function displayToast(type, title, message) {
     const toastCloseBtn = document.createElement('button');
     toastCloseBtn.id = 'close-toast';
     toastContainer.append(toastCloseBtn);
-    const toastCloseIcon = document.createElement('i');
-    toastCloseIcon.className = 'fa-solid fa-xmark';
+    const toastCloseIcon = document.createElement('span');
+    toastCloseIcon.className = 'material-icons';
+    toastCloseIcon.textContent = 'close';
     toastCloseBtn.append(toastCloseIcon);
     addCloseBtnEventListener(type);
     

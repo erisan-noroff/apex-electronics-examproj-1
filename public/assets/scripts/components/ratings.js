@@ -3,11 +3,9 @@ export function createStarsElement(rating) {
     stars.classList.add('ratings');
 
     for (let i = 1; i <= 5; i++) {
-        const star = document.createElement('i');
-        if (i <= Math.floor(rating))
-            star.classList.add('fa-solid', 'fa-star');
-        else
-            star.classList.add('fa-regular', 'fa-star');
+        const star = document.createElement('span');
+        star.className = 'material-icons';
+        star.textContent = i <= Math.floor(rating) ? 'star' : 'star_border';
         stars.appendChild(star);
     }
 

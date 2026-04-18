@@ -11,11 +11,10 @@ headerTemplate.innerHTML = `
                 ${!isAuthenticated() ? '<li><a href="sign-in.html">Login</a></li>' : ''}
                 <!-- Non-functional/not yet implemeneted. -->
                 <li>${CartButton().outerHTML}</li>
-                <!--<li><i class="fa-solid fa-cart-shopping"></i></li>-->
             </ul>
         </nav>
         <button id="toggle-mobile-menu" class="mobile-menu-toggle" aria-label="Menu" type="button">
-            <i class="fa-solid fa-bars mobile-menu-toggle__icon"></i>
+            <span class="material-icons mobile-menu-toggle__icon">menu</span>
         </button>
         <nav class="mobile-nav">
             <a href="index.html"><span class="material-icons">devices</span>Products</a>
