@@ -382,9 +382,12 @@ button {
     height: 1.5rem;
     border-radius: 50%;
     overflow: hidden;
-    font-size: 0.75rem;
     color: var(--background);
     flex-shrink: 0;
+}
+
+.toast__icon .material-icons {
+    font-size: 1rem;
 }
 
 .toast__icon.toast--success {
