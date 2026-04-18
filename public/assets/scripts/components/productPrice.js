@@ -3,7 +3,6 @@ export function createPriceElement(discountedPrice, price) {
     if (discountedPrice < price) {
         const discountedPriceElement = document.createElement('span');
         discountedPriceElement.textContent = `${discountedPrice},- `;
-        discountedPriceElement.classList.add('discounted-price');
         const originalPriceElement = document.createElement('span');
         originalPriceElement.textContent = `${price}`;
         originalPriceElement.classList.add('original-price');

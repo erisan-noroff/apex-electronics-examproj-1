@@ -93,7 +93,7 @@ function productTagsElements(tags) {
 }
 
 function addToCart() {
-    const button = Button('Add to Cart', 'primary-button');
+    const button = Button('Add to Cart', 'primary-btn');
     
     button.addEventListener('click', () => {
         ToastMessage.success('Added to cart', 'Product has been added to your cart');
