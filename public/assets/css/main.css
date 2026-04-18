@@ -65,16 +65,24 @@ nav ul {
 
 a {
     text-decoration: none;
-    color: var(--primary-blue);
 }
 
 p {
     margin: 0.25rem;
 }
 
-.logo, nav {
-    font-family: var(--font-heading), sans-serif;
+a,
+.logo,
+nav,
+.share-link,
+.cart-icon,
+.mobile-menu-toggle__icon,
+.form-card__forgot-password {
     color: var(--primary-blue);
+}
+
+.logo, nav, h1, h2 {
+    font-family: var(--font-heading), sans-serif;
 }
 
 h2, h3, nav, button, .toast__title, .primary-button, .discounted-price, .product-card__title {
@@ -102,10 +110,6 @@ section {
 
 nav a {
     font-size: 1.125rem;
-}
-
-a {
-    color: var(--primary-blue);
 }
 
 a:active {
@@ -299,7 +303,6 @@ button {
     display: flex;
     gap: var(--spacing-1);
     align-items: center;
-    color: var(--primary-blue);
     cursor: pointer;
 }
 
@@ -311,7 +314,6 @@ button {
 .cart-icon,
 .mobile-menu-toggle__icon {
     font-size: 1.5rem;
-    color: var(--primary-blue);
 }
 
 .mobile-menu-toggle {
@@ -448,10 +450,6 @@ button {
     display: flex;
     gap: var(--spacing-1);
     align-items: center;
-}
-
-.form-card__forgot-password {
-    color: var(--primary-blue);
 }
 
 .form-card .primary-button {
