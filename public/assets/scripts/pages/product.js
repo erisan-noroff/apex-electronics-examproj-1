@@ -110,10 +110,9 @@ function shareLinkElement(productId) {
 
     const shareIcon = document.createElement('i');
     shareIcon.classList.add('fa-solid', 'fa-link');
-    
-    share.appendChild(shareIcon);
-    const shareText = document.createTextNode('Share');
-    share.appendChild(shareText);
+    share.prepend(shareIcon);
+
+    const shareText = share.lastChild;
 
     share.addEventListener('click', () => {
         const url = new URL(`product.html?id=${productId}`, window.location.href).toString();
