@@ -21,8 +21,8 @@ main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: var(--spacing-7) var(--spacing-4);
-    gap: var(--spacing-5);
+    padding: var(--spacing-7);
+    gap: var(--spacing-7);
     max-width: 90rem;
     width: 100%;
     margin-inline: auto;
@@ -149,16 +149,6 @@ button {
     gap: 0.5rem;
 }
 
-.carousel {
-    display: flex;
-    width: max-content;
-    transform: translateX(var(--offset, 0px));
-}
-
-.carousel--animating {
-    transition: 300ms ease;
-}
-
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -182,15 +172,23 @@ button {
     object-position: center;
 }
 
+.carousel-wrapper {
+    position: relative;
+    max-width: 75rem;
+    width: 100%;
+    padding-inline: 4rem;
+}
+
+.carousel-wrapper__inner {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    max-width: calc(100% - 8rem);
+}
+
 .carousel-wrapper, .grid-wrapper {
     align-items: center;
     gap: var(--spacing-5);
-}
-
-.carousel-window {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
 }
 
 .carousel:has(.loading-state) {
@@ -198,21 +196,38 @@ button {
     justify-content: center;
 }
 
-.carousel__item {
-    width: 25rem;
-    aspect-ratio: 1 / 1;
-    flex-shrink: 0;
-    margin-right: var(--spacing-4);
-}
-
-.carousel__item img {
+.carousel-wrapper__item {
+    display: none;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+    flex-shrink: 0;
 }
 
-.carousel__btn--prev, .carousel__btn--next {
+.carousel-wrapper__item--active {
+    display: flex;
+}
+
+.carousel-wrapper__item img {
+    max-width: 37.5rem;
+    max-height: 37.5rem;
+    width: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.carousel-wrapper__item__content {
+    flex: 1;
+    padding-left: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-5);
+}
+
+.carousel-wrapper__item__content__discounted-price {
+    font-size: 1.25rem;
+}
+
+.carousel-wrapper__btn--prev, .carousel-wrapper__btn--next {
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -223,20 +238,24 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    border: 0.25rem solid var(--text-primary);
     transform: translateY(-50%);
 }
 
-.carousel__btn--prev:hover, .carousel__btn--next:hover {
+.carousel-wrapper__btn--prev:hover, .carousel-wrapper__btn--next:hover {
     color: inherit;
 }
 
-.carousel__btn--prev {
-    left: var(--spacing-3);
+.carousel-wrapper__btn--prev {
+    left: 1.5rem;
 }
-.carousel__btn--next {
-    right: var(--spacing-3);
+
+.carousel-wrapper__btn--next {
+    right: 1.5rem;
+}
+
+.carousel-wrapper__btn--next .material-icons-outlined,
+.carousel-wrapper__btn--prev .material-icons-outlined {
+    font-size: 2.5rem;
 }
 
 .product-info {
@@ -507,7 +526,7 @@ input.input-wrapper__input--error {
 }
 
 @media (max-width: 1024px) {
-    .carousel__item {
+    .carousel-wrapper__item {
         width: 18.75rem;
     }
 
@@ -621,16 +640,16 @@ input.input-wrapper__input--error {
         gap: var(--spacing-4);
     }
 
-    .carousel__item {
+    .carousel-wrapper__item {
         width: 15.625rem;
         margin-right: var(--spacing-3);
     }
 
-    .carousel__btn--prev {
+    .carousel-wrapper__btn--prev {
         left: var(--spacing-2);
     }
 
-    .carousel__btn--next {
+    .carousel-wrapper__btn--next {
         right: var(--spacing-2);
     }
     

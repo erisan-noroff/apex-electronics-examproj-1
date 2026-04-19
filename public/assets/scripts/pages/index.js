@@ -2,6 +2,7 @@ import { getAllProducts } from '../api/productApi.js';
 import { ToastMessage } from '../components/toast-messages.js';
 import { createRatingsElement } from '../components/ratings.js';
 import { createPriceElement } from '../components/productPrice.js';
+import { Button } from '../components/buttons.js';
 
 async function init() {
     try {
@@ -19,42 +20,53 @@ async function init() {
 }
 
 function renderCarousel(products) {
-    const h1 = document.createElement('h1');
-    h1.textContent = 'What We Offer';
-
     const carouselWrapper = document.createElement('section');
     carouselWrapper.classList.add('carousel-wrapper');
-    const carouselWindow = document.createElement('div');
-    carouselWindow.classList.add('carousel-window');
-    const carousel = document.createElement('div');
-    carousel.classList.add('carousel');
-    carouselWindow.appendChild(carousel);
-    carouselWrapper.append(h1, carouselWindow);
+    const carouselInner = document.createElement('div');
+    carouselInner.classList.add('carousel-wrapper__inner');
+    const discounted = products.filter(p => p.discountedPrice < p.price);
+    const carouselProducts = discounted.slice(0, 3);
 
-
-    const carouselItems = products.map((product) => {
-        const item = document.createElement('a');
-        item.classList.add('carousel__item');
-        item.href = new URL(`product.html?id=${product.id}`, window.location.href).toString();
-
+    const carouselItems = carouselProducts.map((product) => {
+        const item = document.createElement('div');
+        item.classList.add('carousel-wrapper__item');
+        
+        const anchorElement = document.createElement('a');
+        anchorElement.href = new URL(`product.html?id=${product.id}`, window.location.href).toString();
+        item.append(anchorElement);
+        
         const image = document.createElement('img');
         image.src = product.image.url;
         image.alt = product.image.alt;
-        item.appendChild(image);
+        anchorElement.appendChild(image);
+        
+        const content = document.createElement('div');
+        content.classList.add('carousel-wrapper__item__content');
+        item.append(content);
+        
+        const productName = document.createElement('h2');
+        productName.textContent = product.title;
+        content.append(productName);
+        
+        const description = document.createElement('p');
+        description.textContent = product.description;
+        content.append(description);
+        
+        const price = createPriceElement(product.discountedPrice, product.price);
+        price.children[0].classList.add('carousel-wrapper__item__content__discounted-price');
+        content.append(price);
+        
+        const button = Button('View Product', 'primary-btn carousel-wrapper__item__btn');
+        button.dataset.productId = product.id;
+        content.append(button);
+        
         return item;
     });
 
-    const cloneFirst = carouselItems[0].cloneNode(true);
-    const cloneSecond = carouselItems[1].cloneNode(true);
-    const cloneThird = carouselItems[2].cloneNode(true);
-    const cloneSecondLast = carouselItems[carouselItems.length - 2].cloneNode(true);
-    const cloneLast = carouselItems[carouselItems.length - 1].cloneNode(true);
-
-    products.forEach(p => { new Image().src = p.image.url; });
-    carousel.replaceChildren(cloneSecondLast, cloneLast, ...carouselItems, cloneFirst, cloneSecond, cloneThird);
-
-    requestAnimationFrame(() => carouselNavigationButtons(carouselItems, carousel, carouselWindow));
-
+    carouselInner.replaceChildren(...carouselItems);
+    carouselWrapper.appendChild(carouselInner);
+    
+    requestAnimationFrame(() => carouselNavigationButtons(carouselItems, carouselWrapper));
     return carouselWrapper;
 }
 
@@ -62,9 +74,9 @@ function renderGrid(products) {
     const section = document.createElement('section');
     section.classList.add('grid-wrapper');
     
-    const h2 = document.createElement('h2');
-    h2.textContent = 'Shop the Range';
-    section.append(h2);
+    const h1 = document.createElement('h1');
+    h1.textContent = 'What We Offer';
+    section.append(h1);
     
     const divGrid = document.createElement('div');
     divGrid.classList.add('grid');
@@ -99,94 +111,39 @@ function renderGrid(products) {
     return section;
 }
 
-function carouselNavigationButtons(items, carousel, carouselWindow) {
-    const count = items.length;
+function carouselNavigationButtons(items, carousel) {
     let currentIndex = 0;
-    let isAnimating = false;
 
-    const getItemStep = () =>
-        items[0].offsetWidth + parseFloat(getComputedStyle(items[0]).marginRight);
+    items[0].classList.add('carousel-wrapper__item--active');
 
-    function goTo(domIndex, animate) {
-        const step = getItemStep();
-        const peekOffset = (carouselWindow.offsetWidth % step) / 2;
-        carousel.classList.toggle('carousel--animating', animate);
-        if (!animate) void carousel.offsetWidth;
-        carousel.style.setProperty('--offset', `${-(domIndex * step) + peekOffset}px`);
+    function goTo(index) {
+        items[currentIndex].classList.remove('carousel-wrapper__item--active');
+        currentIndex = (index + items.length) % items.length;
+        items[currentIndex].classList.add('carousel-wrapper__item--active');
     }
-
-    function onTransitionEnd(callback) {
-        let settled = false;
-        const settle = () => {
-            if (settled) return;
-            settled = true;
-            callback();
-        };
-
-        const handler = (e) => {
-            if (e.propertyName !== 'transform') return;
-            carousel.removeEventListener('transitionend', handler);
-            settle();
-        };
-
-        carousel.addEventListener('transitionend', handler);
-        setTimeout(settle, 300);
-    }
-
-    goTo(2, false);
-
-    window.addEventListener('resize', () => goTo(currentIndex + 2, false));
 
     function createNavigationButton(iconName, classNameSuffix) {
         const button = document.createElement('button');
-        button.classList.add(`carousel__btn--${classNameSuffix}`);
+        button.classList.add(`carousel-wrapper__btn--${classNameSuffix}`);
         const arrow = document.createElement('span');
-        arrow.className = 'material-icons';
+        arrow.className = 'material-icons-outlined';
         arrow.textContent = iconName;
         button.append(arrow);
         return button;
     }
 
-    const buttonLeft = createNavigationButton('arrow_back', 'prev');
-    const buttonRight = createNavigationButton('arrow_forward', 'next');
-    carouselWindow.append(buttonLeft, buttonRight);
+    const buttonLeft = createNavigationButton('arrow_circle_left', 'prev');
+    const buttonRight = createNavigationButton('arrow_circle_right', 'next');
+    carousel.append(buttonLeft, buttonRight);
 
     buttonLeft.addEventListener('click', (e) => {
         e.preventDefault();
-        if (isAnimating) return;
-        isAnimating = true;
-        if (currentIndex === 0) {
-            goTo(1, true);
-            onTransitionEnd(() => {
-                goTo(count + 1, false);
-                currentIndex = count - 1;
-                isAnimating = false;
-            });
-            return;
-        }
-
-        currentIndex--;
-        goTo(currentIndex + 2, true);
-        onTransitionEnd(() => { isAnimating = false; });
+        goTo(currentIndex - 1);
     });
 
     buttonRight.addEventListener('click', (e) => {
         e.preventDefault();
-        if (isAnimating) return;
-        isAnimating = true;
-        if (currentIndex === count - 1) {
-            goTo(count + 2, true);
-            onTransitionEnd(() => {
-                goTo(2, false);
-                currentIndex = 0;
-                isAnimating = false;
-            });
-            return;
-        }
-
-        currentIndex++;
-        goTo(currentIndex + 2, true);
-        onTransitionEnd(() => { isAnimating = false; });
+        goTo(currentIndex + 1);
     });
 }
 
