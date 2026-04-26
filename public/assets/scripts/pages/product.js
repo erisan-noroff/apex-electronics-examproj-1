@@ -34,6 +34,10 @@ function renderNotFound() {
     main.replaceChildren(wrapper);
 }
 
+function appendProductNameToPageTitle(productTitle) {
+    document.title = `Apex Electronics — ${productTitle}`;
+}
+
 function renderProduct(product) {
     const section = document.createElement('section');
     section.classList.add('product-info');
@@ -50,6 +54,7 @@ function renderProduct(product) {
     const productName = document.createElement('h1');
     productName.textContent = product.title;
     productInfoContent.appendChild(productName);
+    appendProductNameToPageTitle(product.title);
     
     const productInfoPriceRatings = document.createElement('div');
     productInfoPriceRatings.classList.add('product-info__price-ratings');
