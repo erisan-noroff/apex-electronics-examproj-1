@@ -26,7 +26,7 @@ Wasn't quite sure how to create the image carousel in Figma. Tried to ask Claude
 
 ## Development Phase
 ### HTML Meta Description
-HTML Meta Descriptions are AI-generated.
+HTML Meta Descriptions are AI-generated on all pages. Proofread it and suggested updates where appropriate.
 
 ### Product Information Page
 **07/03/2026:**
