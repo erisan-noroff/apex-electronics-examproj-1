@@ -4,6 +4,7 @@ import formValidation from '../utils/form-validation.js';
 import { authApiClient, isAuthenticated } from '../utils/authentication.js';
 
 const formCard = document.querySelector('.form-card');
+const form = document.querySelector('.form-card__form');
 async function init() {
     if (isAuthenticated()) {
         window.location.href = new URL('index.html', window.location.href).toString();
@@ -14,11 +15,11 @@ async function init() {
 }
 
 function signUpButton() {
-    if (formCard) {
+    if (form) {
         const signUpButton = Button('Sign Up', 'primary-btn', 'sign-up', ButtonType.Submit);
-        formCard.append(signUpButton);
+        form.append(signUpButton);
 
-        formCard.addEventListener('submit', async (e) => {
+        form.addEventListener('submit', async (e) => {
             const isValid = formValidation(e);
             if (!isValid) return;
             const firstName = document.getElementById('first-name').value;

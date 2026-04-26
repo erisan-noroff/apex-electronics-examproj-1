@@ -14,28 +14,30 @@
     <header-component></header-component>
     <main>
         <div class="signin-wrapper content-gutters">
-            <form class="form-card">
+            <div class="form-card">
                 <h1>Sign In</h1>
                 <p>Enter your credentials to sign in</p>
-                <div class="input-wrapper">
-                    <label for="email" class="input-wrapper__label">Email</label>
-                    <input id="email" type="email" autocomplete="email" placeholder="john.doe@stud.noroff.no" required />
-                </div>
-                <div class="input-wrapper">
-                    <label for="password" class="input-wrapper__label">Password</label>
-                    <input id="password" type="password" autocomplete="password" placeholder="Password" required />
-                </div>
-                <div class="form-card__row">
-                    <div>
-                        <input id="remember-me" type="checkbox" />
-                        <label for="remember-me">Remember me</label>
+                <form class="form-card__form">
+                    <div class="input-wrapper">
+                        <label for="email" class="input-wrapper__label">Email</label>
+                        <input id="email" type="email" autocomplete="email" placeholder="john.doe@stud.noroff.no" required />
                     </div>
-                </div>
-                <div class="form-card__inline">
-                    <p>Not registered yet?</p>
-                    <a href="sign-up.html">Create an account</a>
-                </div>
-            </form>
+                    <div class="input-wrapper">
+                        <label for="password" class="input-wrapper__label">Password</label>
+                        <input id="password" type="password" autocomplete="password" placeholder="Password" required />
+                    </div>
+                    <div class="form-card__row">
+                        <div>
+                            <input id="remember-me" type="checkbox" />
+                            <label for="remember-me">Remember me</label>
+                        </div>
+                    </div>
+                    <div class="form-card__inline">
+                        <p>Not registered yet?</p>
+                        <a href="sign-up.html">Create an account</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </main>
     <footer-component></footer-component>

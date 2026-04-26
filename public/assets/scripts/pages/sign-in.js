@@ -15,11 +15,11 @@ function init() {
 }
 
 function signInButton() {
-    const formCard = document.querySelector('.form-card');
+    const formCard = document.querySelector('.form-card__form');
     if (formCard) {
         const signInButton = Button('Sign In', 'primary-btn', 'sign-in', ButtonType.Submit);
         formCard.insertBefore(signInButton, formCard.lastElementChild);
-        
+
         formCard.addEventListener('submit', async(e) => {
             const isValid = formValidation(e);
             if (!isValid) return;
