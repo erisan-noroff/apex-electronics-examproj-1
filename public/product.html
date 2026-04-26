@@ -7,17 +7,16 @@
     <title>Apex Electronics</title>
     <link rel="stylesheet" href="assets/css/main.css">
     <script type="module" src="assets/scripts/components/header.js" defer></script>
+    <script type="text/javascript" src="assets/scripts/components/loading-spinner.js"></script>
     <script type="text/javascript" src="assets/scripts/components/footer.js" defer></script>
     <script type="module" src="assets/scripts/pages/product.js"></script>
 </head>
 <body>
     <header-component></header-component>
     <main class="product-info-page">
-        <div class="loading-state">
-            <p>Fetching data...</p>
-            <div class="loading-state__spinner"></div>
-        </div>
+        <loading-spinner-component></loading-spinner-component>
     </main>
+    
     <footer-component></footer-component>
 </body>
 </html>
