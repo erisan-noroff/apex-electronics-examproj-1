@@ -20,6 +20,10 @@ Final suggestion output: "Go with blue primary + grey secondary + vibrant accent
 * Grey for text, borders, subtle elements
 * A vibrant colour (orange or coral) ONLY for important actions like "Add to Cart" buttons".
 
+### Header
+**26/04/2026**
+When implementing a custom event for updating the cart item counter, I noticed the counter refused to update. Consulted AI, and learned that using CartButton().outerHTML inside the header template's innerHTML serialized the button to a plain HTML string, stripping all JS references and event listeners. The fix was to use a placeholder element in the template and append the CartButton() element directly to the DOM in connectedCallback.
+
 ### Product Carousel
 #### Figma Design
 Wasn't quite sure how to create the image carousel in Figma. Tried to ask Claude and got some guidance. Ended up watching https://www.youtube.com/watch?v=4YFRYho3vuM instead through old fashioned Google searching.

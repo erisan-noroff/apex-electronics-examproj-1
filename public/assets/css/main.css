@@ -44,7 +44,6 @@ body, header, main {
 
 header {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     padding: var(--spacing-3) var(--spacing-4);
     border-bottom: 1px solid var(--border);
@@ -110,7 +109,6 @@ h3 {
 section {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-3);
 }
 
 a:active {
@@ -144,6 +142,10 @@ button {
     border-radius: 0.5rem;
 }
 
+.primary-btn--full {
+    width: 100%;   
+}
+
 .cart-btn {
     display: flex;
     gap: 0.5rem;
@@ -173,7 +175,6 @@ button {
 
 .carousel-wrapper {
     position: relative;
-    max-width: 75rem;
     width: 100%;
     padding-inline: 4rem;
     display: flex;
@@ -462,7 +463,7 @@ button {
     flex-direction: column;
 }
 
-.product-description, .toast__message, .ratings__count {
+.product-description, .toast__message, .ratings__count, .cart-items--empty-text {
     color: var(--text-secondary);
 }
 
@@ -509,6 +510,13 @@ button {
     padding: var(--spacing-4);
 }
 
+.form-card__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    width: 100%;
+}
+
 .form-card__row {
     display: flex;
     gap: var(--spacing-2);
@@ -520,10 +528,7 @@ button {
     display: flex;
     gap: var(--spacing-1);
     align-items: center;
-}
-
-.form-card .primary-btn {
-    width: 100%;
+    justify-content: center;
 }
 
 .input-wrapper {
@@ -552,6 +557,58 @@ input.input-wrapper__input--error {
 
 .input-wrapper__error {
     color: var(--error);
+}
+
+.cart-layout {
+    display: flex;
+}
+
+.cart-items {
+    max-width: 39.25rem;
+    gap: var(--spacing-7);
+}
+
+.cart-items--empty {
+    width: 18.75rem;
+    margin: auto;
+    align-items: center;
+}
+
+.cart-items--empty__icon {
+    font-size: 4.5rem;
+    color: var(--text-secondary);
+}
+
+.cart-items__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-items__rows {
+    display: flex;
+    gap: var(--spacing-4);
+}
+
+.cart-items__row {
+    display: flex;
+    gap: var(--spacing-4); 
+}
+
+.cart-items__row img {
+    width: 6.25rem;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.cart-items__row__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+.cart-items--empty-button {
+    color: var(--text-secondary);
+    text-decoration: underline;
 }
 
 @keyframes spin {
@@ -748,5 +805,9 @@ input.input-wrapper__input--error {
     
     .grid {
         grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .cart-items--empty__icon {
+        font-size: 3rem;
     }
 }

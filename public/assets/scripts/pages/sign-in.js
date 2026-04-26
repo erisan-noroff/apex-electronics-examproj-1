@@ -17,7 +17,7 @@ function init() {
 function signInButton() {
     const formCard = document.querySelector('.form-card__form');
     if (formCard) {
-        const signInButton = Button('Sign In', 'primary-btn', 'sign-in', ButtonType.Submit);
+        const signInButton = Button('Sign In', 'primary-btn primary-btn--full', 'sign-in', ButtonType.Submit);
         formCard.insertBefore(signInButton, formCard.lastElementChild);
 
         formCard.addEventListener('submit', async(e) => {

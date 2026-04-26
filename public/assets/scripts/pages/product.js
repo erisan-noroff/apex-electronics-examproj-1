@@ -3,6 +3,7 @@ import { ToastMessage } from '../components/toast-messages.js';
 import { createRatingsElement, createStarsElement } from '../components/ratings.js';
 import { Button } from '../components/buttons.js';
 import { createPriceElement } from '../components/productPrice.js';
+import { addItemToCart } from '../utils/cart.js';
 
 const main = document.querySelector('main');
 async function init() {
@@ -76,7 +77,7 @@ function renderProduct(product) {
     
     if (product.reviews.length > 0) renderProductReviews(product.rating, product.reviews);
     
-    const button = addToCart();
+    const button = addToCart(product);
     productInfoContent.appendChild(button);
     
     const share = shareLinkElement(product.id);
@@ -97,11 +98,16 @@ function productTagsElements(tags) {
     return tagsElement;
 }
 
-function addToCart() {
+function addToCart(product) {
     const button = Button('Add to Cart', 'primary-btn');
     
     button.addEventListener('click', () => {
-        ToastMessage.success('Added to cart', 'Product has been added to your cart');
+        try {
+            addItemToCart(product);
+             ToastMessage.success('Added to cart', 'Product has been added to your cart.');
+        } catch {
+            ToastMessage.error('Something went wrong', 'Could not add item to cart. Please try again.');
+        }
     });
     
     return button;

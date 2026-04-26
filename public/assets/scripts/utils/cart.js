@@ -11,6 +11,7 @@ export function addItemToCart(product) {
         cart.push({ id: product.id, quantity: 1 });
     
     localStorage.setItem('cart', JSON.stringify(cart));
+    document.dispatchEvent(new CustomEvent('cart:updated'));
 }
 
 export function removeFromCart(product) {

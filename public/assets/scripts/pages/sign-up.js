@@ -16,7 +16,7 @@ async function init() {
 
 function signUpButton() {
     if (form) {
-        const signUpButton = Button('Sign Up', 'primary-btn', 'sign-up', ButtonType.Submit);
+        const signUpButton = Button('Sign Up', 'primary-btn primary-btn--full', 'sign-up', ButtonType.Submit);
         form.append(signUpButton);
 
         form.addEventListener('submit', async (e) => {
