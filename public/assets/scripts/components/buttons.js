@@ -1,3 +1,5 @@
+import { getCartItemCount } from '../utils/cart.js';
+
 /**
  * Button type enum for form buttons
  */
@@ -23,7 +25,8 @@ export function Button(text, className = '', idPrefix='', type = ButtonType.Butt
     return button;
 }
 
-export function CartButton(itemsCount = 0) {
+export function CartButton() {
+    const itemsCount = getCartItemCount();
     const button = Button(`Cart (${itemsCount})`, 'primary-btn cart-btn', 'cart');
     const cartIcon = document.createElement('span');
     cartIcon.classList.add('material-icons');
