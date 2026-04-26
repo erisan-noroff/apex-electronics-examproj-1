@@ -21,6 +21,7 @@ main {
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding-top: var(--spacing-7);
     gap: var(--spacing-7);
     max-width: 90rem;
     width: 100%;
@@ -28,7 +29,7 @@ main {
 }
 
 .content-gutters {
-    padding: var(--spacing-7);
+    padding-inline: var(--spacing-7);
 }
 
 .product-info-page {
@@ -242,8 +243,8 @@ button {
     display: none;
     align-items: center;
     justify-content: center;
+    padding-top: var(--spacing-2);
     gap: var(--spacing-3);
-    padding: var(--spacing-2) 0;
 }
 
 .carousel-wrapper__btn--prev,
@@ -575,7 +576,6 @@ input.input-wrapper__input--error {
     
     .carousel-wrapper__item__content {
         padding-left: 0;
-        padding-top: var(--spacing-5);
     }
 
     .carousel-wrapper__item--active {
@@ -593,11 +593,12 @@ input.input-wrapper__input--error {
     }
 
     main {
-        gap: var(--spacing-4);
+        padding-top: var(--spacing-6);
+        gap: var(--spacing-6);
     }
     
     .content-gutters {
-        padding: var(--mobile-content-gutters);
+        padding-inline: var(--spacing-4);
     }
     
     .desktop-menu {
@@ -688,7 +689,6 @@ input.input-wrapper__input--error {
 
     .carousel-wrapper {
         padding-inline: 0;
-        gap: var(--spacing-3);
     }
 
     .carousel-wrapper__inner {
@@ -697,7 +697,8 @@ input.input-wrapper__input--error {
 
     .carousel-wrapper__item__content {
         gap: var(--spacing-4);
-        padding: var(--mobile-content-gutters);
+        padding-top: var(--spacing-4);
+        padding-inline: var(--spacing-4);
     }
 
     .carousel-wrapper__item__image-container {

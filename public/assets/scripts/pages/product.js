@@ -40,7 +40,7 @@ function appendProductNameToPageTitle(productTitle) {
 
 function renderProduct(product) {
     const section = document.createElement('section');
-    section.classList.add('product-info');
+    section.classList.add('product-info', 'content-gutters');
     
     const image = document.createElement('img');
     image.src = product.image.url;
@@ -140,7 +140,7 @@ function shareLinkElement(productId) {
 function renderProductReviews(rating, reviews) {
     const main = document.querySelector('main');
     const reviewsSection = document.createElement('section');
-    reviewsSection.classList.add('product-reviews');
+    reviewsSection.classList.add('product-reviews', 'content-gutters');
     main.appendChild(reviewsSection);
     
     const reviewsTitle = document.createElement('h2');
