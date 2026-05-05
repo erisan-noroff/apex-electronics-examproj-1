@@ -91,6 +91,9 @@ function renderCarousel(products) {
         const button = Button('View Product', 'primary-btn carousel-wrapper__item__btn');
         button.dataset.productId = product.id;
         content.append(button);
+        button.addEventListener('click', () => {
+           window.location =  productLink;
+        });
 
         item.append(imageContainer, content);
         return item;
