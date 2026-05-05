@@ -1,4 +1,4 @@
-import { emptyCart, getCart, getCartItemCount } from '../utils/cart.js';
+import { emptyCart, getCart, getCartItemCount, updateCartItemQuantity } from '../utils/cart.js';
 import { Button } from '../components/buttons.js';
 import { getProductById } from '../api/productApi.js';
 import { createPriceElement } from '../components/productPrice.js';
@@ -24,14 +24,15 @@ async function renderCartSectionContent() {
     
     const cartItems = getCart();
     for (let i = 0; i < cartItems.length; i++) {
-        const cartItemsRow = await renderCartItemsRow(cartItems[i].id, cartItemsRowsContainer);
+        const cartItemsRow = await renderCartItemsRow(cartItems[i]);
         cartItemsRowsContainer.append(cartItemsRow);
     } 
 }
 
-async function renderCartItemsRow(productId) {
+async function renderCartItemsRow(cartItem) {
     const cartItemsRow = document.createElement('div');
     cartItemsRow.classList.add('cart-items__row');
+    const { id: productId, quantity } = cartItem;
     const product = await getProductById(productId);
     
     const image = document.createElement('img');
@@ -46,10 +47,73 @@ async function renderCartItemsRow(productId) {
     
     const price = createPriceElement(product.discountedPrice, product.price);
     
-    cartItemsRowDetails.append(productName, price);
+    const quantityControls = document.createElement('div');
+    quantityControls.classList.add('cart-items__row__quantity');
     
-    cartItemsRow.append(image, cartItemsRowDetails);
+    const reduceQuantityButton = Button('');
+    const reduceQuantityIcon = document.createElement('span');
+    reduceQuantityIcon.classList.add('material-icons');
+    reduceQuantityIcon.textContent = 'remove';
+    reduceQuantityIcon.id = 'reduce-quantity';
+    reduceQuantityButton.append(reduceQuantityIcon);
+    
+    const increaseQuantityButton = Button('');
+    const increaseQuantityIcon = document.createElement('span');
+    increaseQuantityIcon.classList.add('material-icons');
+    increaseQuantityIcon.textContent = 'add';
+    increaseQuantityIcon.id = 'increase-quantity';
+    increaseQuantityButton.append(increaseQuantityIcon);
+    
+    const quantityInput = document.createElement('input');
+    quantityInput.classList.add('cart-items__quantity-input');
+    quantityInput.inputMode = 'numeric';
+    quantityInput.maxLength = 3;
+    quantityInput.value = quantity;
+
+    reduceQuantityButton.addEventListener('click', changeQuantityHandler(productId, quantityInput, -1));
+    increaseQuantityButton.addEventListener('click', changeQuantityHandler(productId, quantityInput, 1));
+    const { onFocus, onInput } = createQuantityInputHandlers(productId);
+    quantityInput.addEventListener('focus', onFocus);
+    quantityInput.addEventListener('input', onInput);
+    
+    quantityControls.append(reduceQuantityButton, quantityInput, increaseQuantityButton);
+    cartItemsRowDetails.append(productName, price);
+    cartItemsRow.append(image, cartItemsRowDetails, quantityControls);
     return cartItemsRow;
+}
+
+function changeQuantityHandler(productId, quantityInput, delta) {
+    return () => {
+        const newQuantity = parseInt(quantityInput.value) + delta;
+        if (newQuantity < 1 || newQuantity > 999) return;
+        updateCartItemQuantity(productId, newQuantity);
+        quantityInput.value = newQuantity.toString();
+    };
+}
+
+function createQuantityInputHandlers(productId) {
+    let timeout;
+    let originalValue;
+
+    return {
+        onFocus(e) {
+            originalValue = e.currentTarget.value;
+        },
+        onInput(e) {
+            const input = e.currentTarget;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                let value = parseInt(input.value);
+                if (!input.value || isNaN(value)) {
+                    input.value = originalValue;
+                    return;
+                }
+                value = Math.max(1, Math.min(999, value));
+                input.value = value;
+                updateCartItemQuantity(productId, value);
+            }, 500);
+        }
+    };
 }
 
 function renderEmptyCart(cartItemsSection) {
