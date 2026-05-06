@@ -1,7 +1,7 @@
 import { getAllProducts } from '../api/productApi.js';
 import { ToastMessage } from '../components/toast-messages.js';
 import { createRatingsElement } from '../components/ratings.js';
-import { createPriceElement } from '../components/productPrice.js';
+import { PriceElement } from '../components/productPrice.js';
 import { Button } from '../components/buttons.js';
 
 function createNavigationButton(iconName, classNameSuffix) {
@@ -84,7 +84,7 @@ function renderCarousel(products) {
         description.textContent = product.description;
         content.append(description);
 
-        const price = createPriceElement(product.discountedPrice, product.price);
+        const price = PriceElement(product.discountedPrice, product.price);
         price.children[0].classList.add('discounted-price');
         content.append(price);
 
@@ -145,7 +145,7 @@ function renderGrid(products) {
         title.textContent = product.title;
 
         const reviews = createRatingsElement(product.rating, product.reviews);
-        const price = createPriceElement(product.discountedPrice, product.price);
+        const price = PriceElement(product.discountedPrice, product.price);
 
         card.append(productUrl, title, reviews, price);
         return card;

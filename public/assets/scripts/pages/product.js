@@ -2,7 +2,7 @@ import { getProductById } from '../api/productApi.js';
 import { ToastMessage } from '../components/toast-messages.js';
 import { createRatingsElement, createStarsElement } from '../components/ratings.js';
 import { Button } from '../components/buttons.js';
-import { createPriceElement } from '../components/productPrice.js';
+import { PriceElement } from '../components/productPrice.js';
 import { addItemToCart } from '../utils/cart.js';
 
 const main = document.querySelector('main');
@@ -59,7 +59,7 @@ function renderProduct(product) {
     
     const productInfoPriceRatings = document.createElement('div');
     productInfoPriceRatings.classList.add('product-info__price-ratings');
-    const price = createPriceElement(product.discountedPrice, product.price);
+    const price = PriceElement(product.discountedPrice, product.price);
     productInfoPriceRatings.appendChild(price);
     productInfoContent.appendChild(productInfoPriceRatings);
     

@@ -1,10 +1,15 @@
 import {emptyCart, getCart, getCartItemCount, removeFromCart, updateCartItemQuantity} from '../utils/cart.js';
 import { Button } from '../components/buttons.js';
 import { getProductById } from '../api/productApi.js';
-import { createPriceElement } from '../components/productPrice.js';
+import { PriceElement } from '../components/productPrice.js';
+import { CartSummary } from '../components/cart-summary.js';
 
 async function init() {
     await renderCartSectionContent();
+    await CartSummary();
+    const proceedToCheckoutBtn = proceedToCheckoutBtnElement();
+    const cartSummary = document.querySelector('.cart-summary');
+    cartSummary.append(proceedToCheckoutBtn);
 }
 
 async function renderCartSectionContent() {
@@ -45,7 +50,7 @@ async function renderCartItemsRow(cartItem) {
     const productName = document.createElement('p');
     productName.textContent = product.title;
     
-    const price = createPriceElement(product.discountedPrice, product.price);
+    const price = PriceElement(product.discountedPrice, product.price);
     
     const quantityControls = document.createElement('div');
     quantityControls.classList.add('cart-items__row__quantity');
@@ -156,6 +161,11 @@ function cartEmptyButtonElement() {
     });
     
     return emptyCartButton;
+}
+
+function proceedToCheckoutBtnElement() {
+    const proceedToCheckoutBtn = Button('Proceed to Checkout', 'primary-btn primary-btn--full');
+    return proceedToCheckoutBtn;
 }
 
 await init();

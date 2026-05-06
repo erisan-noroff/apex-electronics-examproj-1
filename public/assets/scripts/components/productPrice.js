@@ -1,4 +1,4 @@
-export function createPriceElement(discountedPrice, price) {
+export function PriceElement(discountedPrice, price) {
     const priceElement = document.createElement('p');
     if (discountedPrice < price) {
         const discountedPriceElement = document.createElement('span');
