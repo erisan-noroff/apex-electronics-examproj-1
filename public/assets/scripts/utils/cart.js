@@ -17,6 +17,7 @@ export function addItemToCart(product) {
 export function removeFromCart(product) {
     const cartMinusItem = getCart().filter(item => item.id !== product.id);
     localStorage.setItem('cart', JSON.stringify(cartMinusItem));
+    cartUpdatedEventDispatch();
 }
 
 export function updateCartItemQuantity(productId, quantity) {
@@ -32,6 +33,7 @@ export function updateCartItemQuantity(productId, quantity) {
 
 export function emptyCart() {
     localStorage.removeItem('cart');
+    cartUpdatedEventDispatch();
 }
 
 export function getCartItemCount() {

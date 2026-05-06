@@ -6,7 +6,7 @@ export function createPriceElement(discountedPrice, price) {
         discountedPriceElement.textContent = `${discountedPrice},- `;
         const originalPriceElement = document.createElement('span');
         originalPriceElement.textContent = `${price}`;
-        originalPriceElement.classList.add('original-price');
+        originalPriceElement.classList.add('original-price', 'text-secondary');
         priceElement.appendChild(discountedPriceElement);
         priceElement.appendChild(originalPriceElement);
     } else priceElement.textContent = `${price},-`;

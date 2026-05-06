@@ -1,4 +1,4 @@
-import { emptyCart, getCart, getCartItemCount, updateCartItemQuantity } from '../utils/cart.js';
+import {emptyCart, getCart, getCartItemCount, removeFromCart, updateCartItemQuantity} from '../utils/cart.js';
 import { Button } from '../components/buttons.js';
 import { getProductById } from '../api/productApi.js';
 import { createPriceElement } from '../components/productPrice.js';
@@ -70,15 +70,18 @@ async function renderCartItemsRow(cartItem) {
     quantityInput.maxLength = 3;
     quantityInput.value = quantity;
 
+    const removeCartItemButton = Button('Remove');
+
     reduceQuantityButton.addEventListener('click', changeQuantityHandler(productId, quantityInput, -1));
     increaseQuantityButton.addEventListener('click', changeQuantityHandler(productId, quantityInput, 1));
+    removeCartItemButton.addEventListener('click', removeFromCartHandler(product, cartItemsRow));
     const { onFocus, onInput } = createQuantityInputHandlers(productId);
     quantityInput.addEventListener('focus', onFocus);
     quantityInput.addEventListener('input', onInput);
     
     quantityControls.append(reduceQuantityButton, quantityInput, increaseQuantityButton);
     cartItemsRowDetails.append(productName, price);
-    cartItemsRow.append(image, cartItemsRowDetails, quantityControls);
+    cartItemsRow.append(image, cartItemsRowDetails, quantityControls, removeCartItemButton);
     return cartItemsRow;
 }
 
@@ -88,6 +91,19 @@ function changeQuantityHandler(productId, quantityInput, delta) {
         if (newQuantity < 1 || newQuantity > 999) return;
         updateCartItemQuantity(productId, newQuantity);
         quantityInput.value = newQuantity.toString();
+    };
+}
+
+function removeFromCartHandler(product, cartItemsRow) {
+    return () => {
+        removeFromCart(product);
+        cartItemsRow.remove();
+
+        if (getCartItemCount() === 0) {
+            document.querySelector('.cart-items__rows')?.remove();
+            document.querySelector('.cart-items--empty-button')?.remove();
+            renderEmptyCart(document.querySelector('.cart-items'));
+        }
     };
 }
 
@@ -120,11 +136,11 @@ function renderEmptyCart(cartItemsSection) {
     cartItemsSection.classList.add('cart-items--empty');
 
     const cartIcon = document.createElement('span');
-    cartIcon.classList.add('material-icons', 'cart-items--empty__icon');
+    cartIcon.classList.add('material-icons', 'cart-items--empty__icon', 'text-secondary');
     cartIcon.textContent = 'shopping_cart';
 
     const cartEmpty = document.createElement('p');
-    cartEmpty.classList.add('cart-items--empty-text');
+    cartEmpty.classList.add('cart-items--empty-text', 'text-secondary');
     cartEmpty.textContent = 'Nothing here yet!';
 
     const exploreOurShopBtn = Button('Explore our shop', 'primary-btn primary-btn--full');
@@ -134,7 +150,7 @@ function renderEmptyCart(cartItemsSection) {
 }
 
 function cartEmptyButtonElement() {
-    const emptyCartButton = Button('Empty Cart', 'cart-items--empty-button');
+    const emptyCartButton = Button('Empty Cart', 'cart-items--empty-button text-secondary text-underline');
     emptyCartButton.addEventListener('click', () => {
         emptyCart();
     });

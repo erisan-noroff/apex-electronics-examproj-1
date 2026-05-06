@@ -66,3 +66,6 @@ Needed suggestions from AI on what to name the label the pure white (#FFF) colou
 
 **18/04/2026**
 Used AI to replace remaining instances of Font Awesome with Material Design Icons. Purely to save time from having to manually search and replace each instance.
+
+**06/05/2026**
+Prompted AI to group all usage of color: var(--secondary-text) together to keep CSS DRY as well as appending the new class to the relevant JS code.

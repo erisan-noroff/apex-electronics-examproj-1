@@ -69,7 +69,7 @@ function renderProduct(product) {
     
     const description = document.createElement('p');
     description.textContent = product.description;
-    description.classList.add('product-description');
+    description.classList.add('product-description', 'text-secondary');
     productInfoContent.appendChild(description);
 
     const tags = productTagsElements(product.tags);
@@ -129,11 +129,11 @@ function shareLinkElement(productId) {
     share.addEventListener('click', () => {
         const url = new URL(`product.html?id=${productId}`, window.location.href).toString();
         navigator.clipboard.writeText(url).then(() => {
-            share.classList.add('share-link--copied');
+            share.classList.add('share-link--copied', 'text-secondary', 'text-underline');
             shareText.nodeValue = 'Copied to clipboard';
             setTimeout(() => {
                 shareText.nodeValue = 'Share';
-                share.classList.remove('share-link--copied');
+                share.classList.remove('share-link--copied', 'text-secondary', 'text-underline');
             }, 3000);
         }).catch(() => {
             ToastMessage.error('Copy failed','Failed to copy link to clipboard');

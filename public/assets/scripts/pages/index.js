@@ -80,7 +80,7 @@ function renderCarousel(products) {
         content.append(productName);
 
         const description = document.createElement('p');
-        description.classList.add('product-description');
+        description.classList.add('product-description', 'text-secondary');
         description.textContent = product.description;
         content.append(description);
 

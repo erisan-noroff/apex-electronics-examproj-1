@@ -18,7 +18,7 @@ export function createRatingsElement(rating, reviews) {
 
     const ratingsCount = document.createElement('p');
     ratingsCount.textContent = `${reviews.length} ${reviews.length === 1 ? 'review' : 'reviews'}`;
-    ratingsCount.classList.add('ratings__count');
+    ratingsCount.classList.add('ratings__count', 'text-secondary');
 
     reviewRow.appendChild(createStarsElement(rating));
     reviewRow.appendChild(ratingsCount);
