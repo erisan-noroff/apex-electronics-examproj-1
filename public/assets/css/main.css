@@ -569,6 +569,7 @@ input.input-wrapper__input--error {
 .cart-items {
     max-width: 39.25rem;
     gap: var(--spacing-7);
+    margin: 0 auto;
 }
 
 .cart-items--empty {

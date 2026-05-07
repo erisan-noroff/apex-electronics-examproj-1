@@ -6,9 +6,13 @@ import { CartSummary } from '../components/cart-summary.js';
 
 async function init() {
     await renderCartSectionContent();
-    await CartSummary();
+    const cartSummary = await CartSummary();
+    if (!cartSummary) return;
+
+    const cartLayout = document.querySelector('.cart-layout');
+    cartLayout.append(cartSummary);
+
     const proceedToCheckoutBtn = proceedToCheckoutBtnElement();
-    const cartSummary = document.querySelector('.cart-summary');
     cartSummary.append(proceedToCheckoutBtn);
 }
 
@@ -105,6 +109,7 @@ function removeFromCartHandler(product, cartItemsRow) {
         cartItemsRow.remove();
 
         if (getCartItemCount() === 0) {
+            document.querySelector('.cart-summary')?.remove();
             document.querySelector('.cart-items__rows')?.remove();
             document.querySelector('.cart-items--empty-button')?.remove();
             renderEmptyCart(document.querySelector('.cart-items'));
