@@ -679,6 +679,7 @@ input.cart-items__quantity-input {
 
     header {
         padding: var(--spacing-2);
+        flex-wrap: wrap;
     }
 
     main {
