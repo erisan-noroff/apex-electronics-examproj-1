@@ -647,12 +647,6 @@ input.cart-items__quantity-input {
     to { transform: rotate(360deg); }
 }
 
-@media (max-width: 1280px) {
-    .carousel-wrapper__item__image-container {
-        width: 31.25rem;
-    }
-}
-
 @media (max-width: 1024px) {
     .grid {
         grid-template-columns: repeat(2, 1fr);
