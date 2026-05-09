@@ -183,7 +183,6 @@ button {
 
 .carousel-wrapper {
     position: relative;
-    width: 100%;
     padding-inline: 4rem;
     display: flex;
     flex-direction: column;
