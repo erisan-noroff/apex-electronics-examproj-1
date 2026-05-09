@@ -9,7 +9,7 @@ import {
 import { Button } from '../components/buttons.js';
 import { getProductById } from '../api/productApi.js';
 import { PriceElement } from '../components/productPrice.js';
-import { Summary, initCartSummaryListeners } from '../components/summary.js';
+import { Summary, cartSummaryListeners } from '../components/summary.js';
 
 async function init() {
     await renderCartSectionContent();
@@ -21,7 +21,9 @@ async function init() {
 
     const proceedToCheckoutBtn = desktopSummaryCheckoutBtnElement();
     cartSummary.append(proceedToCheckoutBtn);
-    initCartSummaryListeners();
+    
+    cartSummaryListeners();
+    deleteConfirmationDialogue();
 }
 
 async function renderCartSectionContent() {
@@ -64,8 +66,10 @@ async function renderCartItemsRow(cartItem) {
     
     const productName = document.createElement('p');
     productName.textContent = product.title;
-    
+    productName.classList.add('cart-items__row__title');
+
     const price = PriceElement(product.discountedPrice, product.price);
+    price.classList.add('cart-items__row__price');
     
     const quantityControls = document.createElement('div');
     quantityControls.classList.add('cart-items__row__quantity');
@@ -91,6 +95,7 @@ async function renderCartItemsRow(cartItem) {
     quantityInput.value = quantity;
 
     const removeCartItemButton = Button('Remove');
+    removeCartItemButton.classList.add('cart-items__row__remove');
 
     reduceQuantityButton.addEventListener('click', changeQuantityHandler(productId, quantityInput, -1));
     increaseQuantityButton.addEventListener('click', changeQuantityHandler(productId, quantityInput, 1));
@@ -100,8 +105,8 @@ async function renderCartItemsRow(cartItem) {
     quantityInput.addEventListener('input', onInput);
     
     quantityControls.append(reduceQuantityButton, quantityInput, increaseQuantityButton);
-    cartItemsRowDetails.append(productName, price);
-    cartItemsRow.append(image, cartItemsRowDetails, quantityControls, removeCartItemButton);
+    cartItemsRowDetails.append(productName, price, quantityControls, removeCartItemButton);
+    cartItemsRow.append(image, cartItemsRowDetails);
     return cartItemsRow;
 }
 
@@ -152,11 +157,8 @@ function createQuantityInputHandlers(productId) {
 }
 
 function renderEmptyCart() {
-    document.querySelector('.summary')?.remove();
-    document.querySelector('.cart-items__rows')?.remove();
-    document.querySelector('.cart-items--empty-button')?.remove();
-    
     const cartItemsSection = document.querySelector('.cart-items');
+    cartItemsSection.innerHTML = '';
     cartItemsSection.classList.add('cart-items--empty');
 
     const cartIcon = document.createElement('span');
@@ -179,8 +181,10 @@ function renderEmptyCart() {
 function cartEmptyButtonElement() {
     const emptyCartButton = Button('Empty Cart', 'cart-items--empty-button text-secondary text-underline');
     emptyCartButton.addEventListener('click', () => {
-        emptyCart();
-        renderEmptyCart();
+        const modal = document.querySelector('.confirmation-modal');
+        if (!modal) return;
+        
+        modal.showModal();
     });
     
     return emptyCartButton;
@@ -194,6 +198,34 @@ function desktopSummaryCheckoutBtnElement() {
 function mobileSummaryCheckoutBtnElement() {
     const summaryCheckoutBtn = Button('Proceed to Checkout', 'primary-btn primary-btn--full summary__checkout-btn--mobile');
     return summaryCheckoutBtn;
+}
+
+function deleteConfirmationDialogue() {
+    const modal = document.querySelector('.confirmation-modal');
+    if (!modal) return;
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.close();
+    });
+
+    const modalActions = modal.querySelector('.confirmation-modal__actions');
+    if (!modalActions) return;
+
+    const confirmBtn = Button('Yes');
+    confirmBtn.classList.add('confirmation-modal__confirm-btn');
+    confirmBtn.addEventListener('click', () => {
+        emptyCart();
+        renderEmptyCart();
+        modal.close();
+    });
+
+    const dismissBtn = Button('No');
+    dismissBtn.classList.add('confirmation-modal__dismiss-btn');
+    dismissBtn.addEventListener('click', () => {
+        modal.close();
+    });
+
+    modalActions.append(dismissBtn, confirmBtn);
 }
 
 await init();

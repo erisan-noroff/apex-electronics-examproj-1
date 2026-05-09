@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="View and manage the items in your shopping cart at Apex Electronics.">
     <title>Apex Electronics — Cart</title>
     <link rel="stylesheet" href="assets/css/main.css">
@@ -20,5 +21,10 @@
     </section>
 </main>
 <footer-component></footer-component>
+<dialog class="confirmation-modal">
+    <p class="confirmation-modal__header">Empty cart?</p>
+    <p>This will remove all products from your cart</p>
+    <div class="confirmation-modal__actions"></div>
+</dialog>
 </body>
 </html>

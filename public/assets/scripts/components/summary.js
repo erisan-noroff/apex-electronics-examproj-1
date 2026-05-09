@@ -12,36 +12,49 @@ export async function Summary() {
     header.textContent = 'Summary'
     cartSummary.append(header);
     
-    let totalPrice = 0;
+    let totalRowsPrice = 0;
     for (let i = 0; i < cartItems.length; i++) {
         const rowData = await summaryRow(cartItems[i]);
-        totalPrice += rowData.price;
+        totalRowsPrice += rowData.price;
         cartSummary.append(rowData.row);
     }
     
     const subTotalRow = document.createElement('div');
     subTotalRow.classList.add('summary__fee-row');
-    
-    const subTotal = document.createElement('p');
-    subTotal.textContent = 'Subtotal';
-    
-    const subTotalPrice = document.createElement('p');
-    subTotalPrice.classList.add('summary__subtotal-price');
-    subTotalPrice.textContent = formatTotalPrice(totalPrice);
-    subTotalRow.append(subTotal, subTotalPrice);
-    
+
+    const subTotalLabel = document.createElement('p');
+    subTotalLabel.textContent = 'Subtotal';
+
+    const subTotalPriceElement = document.createElement('p');
+    subTotalPriceElement.classList.add('summary__subtotal-price');
+    subTotalPriceElement.textContent = formatTotalPrice(totalRowsPrice);
+    subTotalRow.append(subTotalLabel, subTotalPriceElement);
+
     const shippingRow = document.createElement('div');
     shippingRow.classList.add('summary__fee-row');
-    
-    const shipping = document.createElement('p');
-    shipping.textContent = 'Shipping';
-    
-    const shippingPrice = document.createElement('p');
-    shippingPrice.textContent = '49,-';
-    
-    shippingRow.append(shipping, shippingPrice);
-    cartSummary.append(subTotalRow, shippingRow);
 
+    const shippingLabel = document.createElement('p');
+    shippingLabel.textContent = 'Shipping';
+
+    const shippingPrice = 49;
+    const shippingPriceElement = document.createElement('p');
+    shippingPriceElement.textContent = `${shippingPrice},-`;
+    
+    const totalRow = document.createElement('div');
+    totalRow.classList.add('summary__total-row');
+
+    const totalLabel = document.createElement('p');
+    totalLabel.textContent = 'Total';
+
+    const totalPriceElement = document.createElement('p');
+    totalPriceElement.classList.add('summary__total-price');
+    totalPriceElement.textContent = formatTotalPrice(totalRowsPrice + shippingPrice);
+
+    totalRow.append(totalLabel, totalPriceElement);
+    
+    shippingRow.append(shippingLabel, shippingPriceElement);
+    cartSummary.append(subTotalRow, shippingRow, totalRow);
+    
     return cartSummary;
 }
 
@@ -118,7 +131,7 @@ function formatTotalPrice(totalPrice) {
     return `${totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2} )},-`;
 }
 
-export function initCartSummaryListeners() {
+export function cartSummaryListeners() {
     document.addEventListener('cart:updated', (e) => {
         const { productId, quantity, removed } = e.detail ?? {};
         if (!productId) return;
