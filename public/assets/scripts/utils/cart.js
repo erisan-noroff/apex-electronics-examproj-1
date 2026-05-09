@@ -40,6 +40,6 @@ export function getCartItemCount() {
     return getCart().reduce((total, item) => total + item.quantity, 0);
 }
 
-export function cartUpdatedEventDispatch() {
-    document.dispatchEvent(new CustomEvent('cart:updated'));
+export function cartUpdatedEventDispatch(detail = {}) {
+    document.dispatchEvent(new CustomEvent('cart:updated', { detail }));
 }
