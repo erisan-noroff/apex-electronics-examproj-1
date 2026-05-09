@@ -7,7 +7,7 @@ const TOAST_TYPES = {
     },
     error: {
         id: 'toast-error',
-        modifier: 'toast--error',
+        modifier: 'toast--danger',
         icon: 'close',
         altText: 'error alert'
     }

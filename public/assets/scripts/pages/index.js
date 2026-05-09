@@ -118,14 +118,14 @@ function renderCarousel(products) {
 
 function renderGrid(products) {
     const section = document.createElement('section');
-    section.classList.add('grid-wrapper', 'content-gutters');
+    section.classList.add('content-gutters');
 
     const h1 = document.createElement('h1');
     h1.textContent = 'What We Offer';
     section.append(h1);
 
     const divGrid = document.createElement('div');
-    divGrid.classList.add('grid');
+    divGrid.classList.add('product-grid');
     section.append(divGrid);
 
     const cards = products.map((product) => {

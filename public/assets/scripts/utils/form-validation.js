@@ -12,7 +12,7 @@ export default function formValidation(e) {
     const requiredInputs = e.target.querySelectorAll('[required]');
     for (let i = 0; i < requiredInputs.length; i++) {
         const input = requiredInputs[i];
-        input.classList.remove('input-wrapper__input--error');
+        input.classList.remove('input-wrapper__input--danger');
         input.parentElement.querySelector('span')?.remove();
         if (input.value.trim() === '') appendError(input, `${input.previousElementSibling.textContent} must be filled in`);
         else if (input.type === 'email' && input.dataset.validateDomain) validateEmailDomain(input);
@@ -27,7 +27,7 @@ export default function formValidation(e) {
      */
     function appendError(input, message) {
         isValid = false;
-        input.classList.add('input-wrapper__input--error');
+        input.classList.add('input-wrapper__input--danger');
         const errorSpan = document.createElement('span');
         errorSpan.classList.add('input-wrapper__error');
         errorSpan.innerText = message;
