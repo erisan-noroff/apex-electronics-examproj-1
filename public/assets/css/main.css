@@ -139,7 +139,7 @@ button {
     color: var(--background);
     padding: var(--spacing-3);
     width: fit-content;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     font-weight: 600;
 }
 
@@ -362,7 +362,7 @@ button {
 .product-tags__tag {
     background-color: var(--border);
     color: #000;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     padding: 0.5rem;
 }
 
@@ -581,7 +581,7 @@ button {
     padding: var(--spacing-2);
     background-color: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     width: 100%;
 }
 
@@ -684,7 +684,7 @@ button {
     padding: var(--spacing-2);
     background-color: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
 }
 
 .summary {
@@ -760,7 +760,7 @@ button {
 .confirmation-modal__dismiss-btn, .confirmation-modal__confirm-btn {
     padding: var(--spacing-3);
     width: fit-content;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
 }
 
 .confirmation-modal__dismiss-btn {
@@ -1066,23 +1066,6 @@ button {
     h3 {
         font-size: 1.125rem;
     }
-
-    p {
-        font-size: 0.875rem;
-    }
-
-    nav a {
-        font-size: 0.875rem;
-    }
-
-    .ratings {
-        font-size: 0.875rem;
-    }
-
-    .product-tags {
-        font-size: 0.875rem;
-    }
-
 
     .product-grid {
         grid-template-columns: repeat(1, minmax(0, 1fr));
