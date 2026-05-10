@@ -346,6 +346,7 @@ button {
 
 .product-reviews {
     max-width: 50%;
+    gap: var(--spacing-3);
 }
 
 .product-review {
