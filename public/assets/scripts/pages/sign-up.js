@@ -4,13 +4,13 @@ import formValidation from '../utils/form-validation.js';
 import { authApiClient, isAuthenticated } from '../utils/authentication.js';
 
 async function init() {
-    const form = document.querySelector('.form-card__form');
-    if (!form) return;
-    
     if (isAuthenticated()) {
         window.location.href = new URL('index.html', window.location.href).toString();
         return;
     }
+    
+    const form = document.querySelector('.form-card__form');
+    if (!form) return;
 
     const signUpBtn = signUpBtnElement();
     form.append(signUpBtn);
