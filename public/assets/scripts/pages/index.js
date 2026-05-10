@@ -62,7 +62,7 @@ function renderCarousel(products) {
         productLink.href = new URL(`product.html?id=${product.id}`, window.location.href).toString();
 
         const image = document.createElement('img');
-        image.alt = product.image.alt;
+        image.alt = product.image.alt ?? '';
         image.onload = () => {
             if (image.naturalWidth < 600 || image.naturalHeight < 600)
                 image.style.objectFit = 'none';
@@ -138,7 +138,7 @@ function renderGrid(products) {
 
         const image = document.createElement('img');
         image.src = product.image.url;
-        image.alt = product.image.alt;
+        image.alt = product.image.alt ?? '';
         productUrl.append(image);
 
         const title = document.createElement('p');
