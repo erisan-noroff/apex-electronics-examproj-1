@@ -60,7 +60,7 @@ async function renderCartItemsRow(cartItem) {
     
     const image = document.createElement('img');
     image.src = product.image.url;
-    image.alt = product.image.alt;
+    image.alt = product.image.alt ?? '';
     
     const cartItemsRowDetails = document.createElement('div');
     cartItemsRowDetails.classList.add('cart-items__row__details');

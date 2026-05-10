@@ -45,7 +45,7 @@ function renderProduct(product) {
     
     const image = document.createElement('img');
     image.src = product.image.url;
-    image.alt = product.image.alt;
+    image.alt = product.image.alt ?? '';
     section.appendChild(image);
     
     const productInfoContent = document.createElement('div');
