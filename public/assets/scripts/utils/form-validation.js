@@ -12,9 +12,10 @@ export default function formValidation(e) {
     const requiredInputs = e.target.querySelectorAll('[required]');
     for (let i = 0; i < requiredInputs.length; i++) {
         const input = requiredInputs[i];
-        input.classList.remove('input-wrapper__input--danger');
+        input.classList.remove('input-wrapper__field--error');
         input.parentElement.querySelector('span')?.remove();
         if (input.value.trim() === '') appendError(input, `${input.previousElementSibling.textContent} must be filled in`);
+        else if (!input.checkValidity()) appendError(input, input.validationMessage);
         else if (input.type === 'email' && input.dataset.validateDomain) validateEmailDomain(input);
         else if (input.type === 'password') validatePasswordLength(input);
         if (input.id === 'confirm-password') validatePasswordMatch();
@@ -27,7 +28,7 @@ export default function formValidation(e) {
      */
     function appendError(input, message) {
         isValid = false;
-        input.classList.add('input-wrapper__input--danger');
+        input.classList.add('input-wrapper__field--error');
         const errorSpan = document.createElement('span');
         errorSpan.classList.add('input-wrapper__error');
         errorSpan.innerText = message;

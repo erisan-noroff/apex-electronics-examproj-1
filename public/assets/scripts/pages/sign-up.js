@@ -4,12 +4,14 @@ import formValidation from '../utils/form-validation.js';
 import { authApiClient, isAuthenticated } from '../utils/authentication.js';
 
 const formCard = document.querySelector('.form-card');
-const form = document.querySelector('.form-card__form');
+const form = formCard?.querySelector('.form-card__form');
+
 async function init() {
     if (isAuthenticated()) {
         window.location.href = new URL('index.html', window.location.href).toString();
         return;
     }
+    if (!formCard || !form) return;
 
     signUpButton();
 }

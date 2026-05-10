@@ -10,6 +10,7 @@ import { Button } from '../components/buttons.js';
 import { getProductById } from '../api/productApi.js';
 import { PriceElement } from '../components/productPrice.js';
 import { Summary, cartSummaryListeners } from '../components/summary.js';
+import { isAuthenticated } from '../utils/authentication.js';
 
 async function init() {
     await renderCartSectionContent();
@@ -193,6 +194,11 @@ function cartEmptyButtonElement() {
 function desktopSummaryCheckoutBtnElement() {
     const summaryCheckoutBtn = Button('Proceed to Checkout', 'primary-btn primary-btn--full summary__checkout-btn--desktop');
     summaryCheckoutBtn.addEventListener('click', () => {
+        if (!isAuthenticated()) {
+            document.location = new URL('sign-in.html', window.location.href).toString();
+            return;
+        }
+            
         document.location =  new URL('checkout.html', window.location.href).toString();
     });
     

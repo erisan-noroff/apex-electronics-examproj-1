@@ -13,18 +13,18 @@
 <body>
     <header-component></header-component>
     <main>
-        <div class="signin-wrapper content-gutters">
+        <section class="content-gutters">
             <div class="form-card">
                 <h1>Sign In</h1>
                 <p>Enter your credentials to sign in</p>
-                <form class="form-card__form">
+                <form class="form-card__form" novalidate>
                     <div class="input-wrapper">
                         <label for="email" class="input-wrapper__label">Email</label>
-                        <input id="email" type="email" autocomplete="email" placeholder="john.doe@stud.noroff.no" required />
+                        <input id="email" class="input-wrapper__field" type="email" autocomplete="email" placeholder="john.doe@stud.noroff.no" required />
                     </div>
                     <div class="input-wrapper">
                         <label for="password" class="input-wrapper__label">Password</label>
-                        <input id="password" type="password" autocomplete="password" placeholder="Password" required />
+                        <input id="password" class="input-wrapper__field" type="password" autocomplete="password" placeholder="Password" required />
                     </div>
                     <div class="form-card__row">
                         <div>
@@ -38,7 +38,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </section>
     </main>
     <footer-component></footer-component>
 </body>
