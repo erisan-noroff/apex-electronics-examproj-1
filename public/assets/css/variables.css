@@ -11,9 +11,9 @@
     --text-secondary: #6B7280;
     --border: #E5E7EB;
     --background: #F9FAFB;
-    --card-background: #FFFFFF;
+    --surface: #FFFFFF;
     --star-icon: #FBBF24;
-    --error: #DC2626;
+    --danger: #DC2626;
     --success: #16A34A;
     --spacing-1: 4px;
     --spacing-2: 8px;

@@ -1,3 +1,5 @@
+import { getCartItemCount } from '../utils/cart.js';
+
 /**
  * Button type enum for form buttons
  */
@@ -23,11 +25,16 @@ export function Button(text, className = '', idPrefix='', type = ButtonType.Butt
     return button;
 }
 
-export function CartButton(itemsCount = 0) {
-    const button = Button(`Cart (${itemsCount})`, 'primary-btn cart-btn', 'cart');
+export function CartButton() {
+    const button = Button(`Cart (${getCartItemCount()})`, 'primary-btn cart-btn', 'cart');
     const cartIcon = document.createElement('span');
     cartIcon.classList.add('material-icons');
     cartIcon.textContent = 'shopping_cart';
     button.prepend(cartIcon);
+
+    document.addEventListener('cart:updated', () => {
+        button.childNodes[1].textContent = `Cart (${getCartItemCount()})`;
+    });
+    
     return button;
 }

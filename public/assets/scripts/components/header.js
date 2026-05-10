@@ -9,8 +9,7 @@ headerTemplate.innerHTML = `
             <ul>
                 <li><a href="index.html">Products</a></li>
                 ${!isAuthenticated() ? '<li><a href="sign-in.html">Login</a></li>' : ''}
-                <!-- Non-functional/not yet implemeneted. -->
-                <li>${CartButton().outerHTML}</li>
+                <li id="cart-btn-container"></li>
             </ul>
         </nav>
         <button id="toggle-mobile-menu" class="mobile-menu-toggle" aria-label="Menu" type="button">
@@ -19,7 +18,6 @@ headerTemplate.innerHTML = `
         <nav class="mobile-nav">
             <a href="index.html"><span class="material-icons">devices</span>Products</a>
             ${!isAuthenticated() ? '<a href="sign-in.html"><span class="material-icons">login</span> Sign in</a>' : ''}
-            <!-- Non-functional/not yet implemented. -->
             <a href="cart.html"><span class="material-icons cart-btn">shopping_cart</span> Cart</a>
         </nav>
     </header>
@@ -28,6 +26,7 @@ headerTemplate.innerHTML = `
 class HeaderComponent extends HTMLElement {
     connectedCallback() {
         this.appendChild(headerTemplate.content.cloneNode(true));
+        document.getElementById('cart-btn-container').appendChild(CartButton());
         this.addEventListenerCartButtons();
         this.addEventListenerMobileMenu();
     }
