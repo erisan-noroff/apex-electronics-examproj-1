@@ -192,11 +192,19 @@ function cartEmptyButtonElement() {
 
 function desktopSummaryCheckoutBtnElement() {
     const summaryCheckoutBtn = Button('Proceed to Checkout', 'primary-btn primary-btn--full summary__checkout-btn--desktop');
+    summaryCheckoutBtn.addEventListener('click', () => {
+        document.location =  new URL('checkout.html', window.location.href).toString();
+    });
+    
     return summaryCheckoutBtn;
 }
 
 function mobileSummaryCheckoutBtnElement() {
     const summaryCheckoutBtn = Button('Proceed to Checkout', 'primary-btn primary-btn--full summary__checkout-btn--mobile');
+    summaryCheckoutBtn.addEventListener('click', () => {
+        document.location =  new URL('checkout.html', window.location.href).toString();
+    });
+    
     return summaryCheckoutBtn;
 }
 
