@@ -518,13 +518,6 @@ button {
     width: 100%;
 }
 
-.form-card__form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-4);
-    width: 100%;
-}
-
 .form-card__row {
     display: flex;
     gap: var(--spacing-2);
