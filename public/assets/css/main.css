@@ -89,7 +89,7 @@ nav,
     font-family: var(--font-heading), sans-serif;
 }
 
-h2, h3, nav, button, .toast__title, .primary-btn, .discounted-price, .product-card__title, .confirmation-modal__header {
+h2, h3, nav, button {
     font-weight: 600;
 }
 
@@ -140,6 +140,7 @@ button {
     padding: var(--spacing-3);
     width: fit-content;
     border-radius: 0.5rem;
+    font-weight: 600;
 }
 
 .primary-btn--full {
@@ -173,6 +174,10 @@ button {
     border: 1px solid var(--border);
     padding: var(--spacing-2) var(--spacing-2) var(--spacing-3);
     width: 100%;
+}
+
+.product-card__title {
+    font-weight: 600;
 }
 
 .product-card img {
@@ -356,6 +361,10 @@ button {
     text-decoration: line-through;
 }
 
+.discounted-price {
+    font-weight: 600;
+}
+
 .product-review__row {
     display: flex;
     align-items: center;
@@ -472,6 +481,9 @@ button {
     flex-direction: column;
 }
 
+.toast__title {
+    font-weight: 600;
+}
 
 .toast-wrapper > button {
     all: unset;
@@ -540,19 +552,31 @@ button {
     width: 100%;
 }
 
-input:not([type="checkbox"]) {
-    padding: var(--spacing-2);
-    background-color: var(--surface);
-    border: 1px solid var(--border);
-    width: 100%;
-    border-radius: 0.5rem;
+.input-wrapper--inline {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
 }
 
 .input-wrapper__label {
     font-weight: 600;
 }
 
-input.input-wrapper__input--danger {
+.input-wrapper--inline .input-wrapper__label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.input-wrapper__field {
+    padding: var(--spacing-2);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    width: 100%;
+}
+
+.input-wrapper__field--error {
     border: 1px solid var(--danger);
 }
 
@@ -644,10 +668,14 @@ input.input-wrapper__input--danger {
     gap: var(--spacing-2);
 }
 
-input.cart-items__quantity-input {
+.cart-items__quantity-input {
     width: 2.5rem;
     aspect-ratio: 1;
     text-align: center;
+    padding: var(--spacing-2);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
 }
 
 .summary {
@@ -710,6 +738,10 @@ input.cart-items__quantity-input {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
+.confirmation-modal__header {
+    font-weight: 600;
+}
+
 .confirmation-modal__actions {
     display: flex;
     justify-content: flex-end;
@@ -731,6 +763,62 @@ input.cart-items__quantity-input {
 .confirmation-modal__confirm-btn {
     background-color: var(--danger);
     color: var(--surface);
+}
+
+.checkout-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 25rem;
+    grid-template-areas:
+          "header header"
+          "form summary";
+    column-gap: var(--spacing-7);
+    row-gap: var(--spacing-5);
+    align-items: start;
+    align-self: center;
+    width: 100%;
+    max-width: 75rem;
+}
+
+.checkout-wrapper__header {
+    grid-area: header;
+    text-align: center;
+}
+
+.checkout-wrapper__form {
+    grid-area: form;
+    margin-inline: 0;
+    max-width: none;
+}
+
+.checkout-wrapper .summary {
+    grid-area: summary;
+}
+
+.payment-icon {
+    width: 60px;
+    height: 42px;
+}
+
+.payment-icons {
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+.form-card__row__payment-methods {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: var(--spacing-3);
+}
+
+.form-card__row__payment-methods__card-fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+.form-card__row__payment-methods__card-fields--hidden {
+    display: none;
 }
 
 @keyframes spin {
@@ -939,6 +1027,14 @@ input.cart-items__quantity-input {
             "price"
             "quantity"
             "remove";
+    }
+
+    .checkout-wrapper {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "summary"
+            "form";
     }
 }
 
