@@ -1,8 +1,14 @@
 import { Summary } from '../components/summary.js';
 import { Button, ButtonType } from '../components/buttons.js';
 import formValidation from '../utils/form-validation.js';
+import { isAuthenticated } from '../utils/authentication.js';
 
 async function init() {
+    if (!isAuthenticated()) {
+        window.location.href = new URL('index.html', window.location.href).toString();
+        return;
+    }
+    
     const wrapper = document.querySelector('.checkout-wrapper');
     if (!wrapper) return;
     const summary = await Summary();
@@ -15,7 +21,6 @@ async function init() {
     
     const completePurchaseBtn = completePurchaseBtnElement();
     form.append(completePurchaseBtn);
-    
     
     toggleCardFields();
     changePaymentMethodListener();
@@ -69,7 +74,8 @@ function submitEventListener() {
         }
         
         if (!isValid || !tos.checked) return;
-
+        
+        sessionStorage.setItem('payment-success', 'true');
         document.location =  new URL('checkout-success.html', window.location.href).toString();
     });
 }
