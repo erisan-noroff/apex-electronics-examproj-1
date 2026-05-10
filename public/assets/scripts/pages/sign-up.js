@@ -3,60 +3,65 @@ import { ToastMessage } from '../components/toast-messages.js';
 import formValidation from '../utils/form-validation.js';
 import { authApiClient, isAuthenticated } from '../utils/authentication.js';
 
-const formCard = document.querySelector('.form-card');
-const form = formCard?.querySelector('.form-card__form');
-
 async function init() {
+    const form = document.querySelector('.form-card__form');
+    if (!form) return;
+    
     if (isAuthenticated()) {
         window.location.href = new URL('index.html', window.location.href).toString();
         return;
     }
-    if (!formCard || !form) return;
 
-    signUpButton();
+    const signUpBtn = signUpBtnElement();
+    form.append(signUpBtn);
+    
+    submitEventListener();
 }
 
-function signUpButton() {
-    if (form) {
-        const signUpButton = Button('Sign Up', 'primary-btn primary-btn--full', 'sign-up', ButtonType.Submit);
-        form.append(signUpButton);
+function signUpBtnElement() {
+    return Button('Sign Up', 'primary-btn primary-btn--full', 'sign-up', ButtonType.Submit);
+}
 
-        form.addEventListener('submit', async (e) => {
-            const isValid = formValidation(e);
-            if (!isValid) return;
-            const firstName = document.getElementById('first-name').value;
-            const lastName = document.getElementById('last-name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            const response = await authApiClient('register', { name: `${firstName}_${lastName}`, email, password });
-            if (!response) ToastMessage.apiDataLoadError();
-            
-            const data = await response.json();
-            if (!response.ok) {
-                ToastMessage.error('Registration failed', data.errors[0].message);
-                return;
-            }
+function submitEventListener() {
+    const form = document.querySelector('.form-card__form');
+    if (!form) return;
+    
+    form.addEventListener('submit', async (e) => {
+        const isValid = formValidation(e);
+        if (!isValid) return;
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
 
-            signUpSuccess();
-        });
-    }
+        const response = await authApiClient('register', { name: `${firstName}_${lastName}`, email, password });
+        if (!response) ToastMessage.apiDataLoadError();
+
+        const data = await response.json();
+        if (!response.ok) {
+            ToastMessage.error('Registration failed', data.errors[0].message);
+            return;
+        }
+
+        signUpSuccess();
+    });
 }
 
 function signUpSuccess() {
-    if (formCard) {
-        const signupSuccessH1 = document.createElement('h1');
-        signupSuccessH1.textContent = 'Registration Successful!';
-        const signupSuccessBody = document.createElement('p');
-        signupSuccessBody.textContent = "We've sent a confirmation email.\nClick the link to activate your account.";
-        const exploreShopButton = Button('Sign in to start shopping', 'primary-btn');
-        formCard.replaceChildren(signupSuccessH1, signupSuccessBody, exploreShopButton);
-        
-        exploreShopButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.location.href = new URL('sign-in.html', window.location.href).toString();
-        });
-    }
+    const formCard = document.querySelector('.form-card');
+    if (!formCard) return;
+    
+    const signupSuccessH1 = document.createElement('h1');
+    signupSuccessH1.textContent = 'Registration Successful!';
+    const signupSuccessBody = document.createElement('p');
+    signupSuccessBody.textContent = "We've sent a confirmation email.\nClick the link to activate your account.";
+    const exploreShopButton = Button('Sign in to start shopping', 'primary-btn');
+    formCard.replaceChildren(signupSuccessH1, signupSuccessBody, exploreShopButton);
+    
+    exploreShopButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = new URL('sign-in.html', window.location.href).toString();
+    });
 }
 
 await init();
