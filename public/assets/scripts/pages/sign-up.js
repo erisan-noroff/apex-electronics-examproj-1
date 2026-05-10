@@ -31,8 +31,11 @@ function signUpButton() {
             if (!response) ToastMessage.apiDataLoadError();
             
             const data = await response.json();
-            if (!response.ok) ToastMessage.error('Registration failed', data.errors[0].message);
-            
+            if (!response.ok) {
+                ToastMessage.error('Registration failed', data.errors[0].message);
+                return;
+            }
+
             signUpSuccess();
         });
     }
