@@ -152,6 +152,14 @@ button {
     gap: 0.5rem;
 }
 
+.product-section {
+    gap: var(--spacing-5);
+}
+
+.product-section__title {
+    text-align: center;
+}
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -832,6 +840,36 @@ button {
     font-weight: 600;
 }
 
+.tos-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-5);
+}
+
+.tos-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.tos-header__subtext {
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.tos-section {
+    gap: var(--spacing-3);
+}
+
+.tos-section__term {
+    font-style: italic;
+}
+
+.tos-section__label {
+    font-weight: 600;
+}
+
 @keyframes spin {
     to {
         transform: rotate(360deg);
@@ -864,7 +902,6 @@ button {
             "summary"
             "rows";
     }
-
 }
 
 @media (max-width: 768px) {
@@ -894,30 +931,6 @@ button {
         display: flex;
     }
 
-    .logo {
-        font-size: 1.5rem;
-    }
-
-    h1 {
-        font-size: 1.75rem;
-    }
-
-    h2 {
-        font-size: 1.25rem;
-    }
-
-    h3 {
-        font-size: 1.125rem;
-    }
-    
-    p {
-        font-size: 0.875rem;
-    }
-
-    nav a {
-        font-size: 0.875rem;
-    }
-
     .product-info__content {
         gap: var(--spacing-2);
     }
@@ -926,24 +939,12 @@ button {
         flex-direction: column;
         gap: 0;
     }
-
-    .product-info.loading-state {
-        gap: var(--spacing-2);
-    }
-
+    
     .product-info img {
         width: 15.625rem;
         height: 15.625rem;
     }
-
-    .ratings {
-        font-size: 0.875rem;
-    }
-
-    .product-tags {
-        font-size: 0.875rem;
-    }
-
+    
     .product-tags__tag {
         padding: var(--spacing-1);
     }
@@ -1017,7 +1018,6 @@ button {
     .summary__checkout-btn--mobile {
         display: block;
     }
-
     
     .cart-items {
         margin: 0;
@@ -1049,7 +1049,40 @@ button {
     body {
         font-size: 14px;
     }
-    
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    h3 {
+        font-size: 1.125rem;
+    }
+
+    p {
+        font-size: 0.875rem;
+    }
+
+    nav a {
+        font-size: 0.875rem;
+    }
+
+    .ratings {
+        font-size: 0.875rem;
+    }
+
+    .product-tags {
+        font-size: 0.875rem;
+    }
+
+
     .product-grid {
         grid-template-columns: repeat(1, minmax(0, 1fr));
     }
@@ -1060,5 +1093,13 @@ button {
     
     .checkout-success {
         gap: var(--spacing-4);
+    }
+
+    .tos-wrapper {
+        gap: var(--spacing-4);
+    }
+    
+    .tos-header {
+        gap: var(--spacing-2);
     }
 }
