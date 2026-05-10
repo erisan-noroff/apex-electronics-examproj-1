@@ -662,9 +662,7 @@ button {
 .cart-items__row__price {
     grid-area: price;
 }
-.cart-items__row__quantity {
-    grid-area: quantity; 
-}
+
 .cart-items__row__remove { 
     grid-area: remove;
     justify-self: start;
@@ -675,6 +673,7 @@ button {
     display: flex;
     align-items: center;
     gap: var(--spacing-2);
+    grid-area: quantity;
 }
 
 .cart-items__quantity-input {
@@ -716,7 +715,6 @@ button {
 
 .summary__fee-row, .summary__total-row {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
 }
 
@@ -1068,7 +1066,7 @@ button {
     }
 
     .product-grid {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
+        grid-template-columns: 1fr;
     }
 
     .cart-items--empty__icon {
