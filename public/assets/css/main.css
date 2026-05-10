@@ -493,21 +493,16 @@ button {
     animation: spin 1s linear infinite;
 }
 
-.signin-wrapper, .signup-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 .form-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-4);
-    width: 30rem;
+    max-width: 30rem;
+    width: 100%;
     border: 1px solid var(--border);
     padding: var(--spacing-4);
+    margin-inline: auto;
 }
 
 .form-card__form {
