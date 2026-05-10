@@ -118,9 +118,10 @@ function renderCarousel(products) {
 
 function renderGrid(products) {
     const section = document.createElement('section');
-    section.classList.add('content-gutters');
+    section.classList.add('content-gutters', 'product-section');
 
     const h1 = document.createElement('h1');
+    h1.classList.add('product-section__title');
     h1.textContent = 'What We Offer';
     section.append(h1);
 
