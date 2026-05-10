@@ -175,8 +175,11 @@ function renderEmptyCart() {
         document.location =  new URL('index.html', window.location.href).toString();
     });
 
+    const heading = document.createElement('h1');
+    heading.textContent = 'Your Cart';
+
     cartItemsSection.prepend(cartIcon);
-    cartItemsSection.append(cartEmpty, exploreOurShopBtn);
+    cartItemsSection.append(heading, cartEmpty, exploreOurShopBtn);
 }
 
 function cartEmptyButtonElement() {
