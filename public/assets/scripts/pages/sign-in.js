@@ -19,7 +19,7 @@ function init() {
 }
 
 function signInButton() {
-    const signInButton = Button('Sign In', 'primary-btn', 'sign-in', ButtonType.Submit);
+    const signInButton = Button('Sign In', 'primary-btn primary-btn--full', 'sign-in', ButtonType.Submit);
     form.insertBefore(signInButton, form.lastElementChild);
 
     form.addEventListener('submit', async(e) => {
