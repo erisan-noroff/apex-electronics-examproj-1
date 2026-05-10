@@ -4,40 +4,41 @@ import formValidation from '../utils/form-validation.js';
 import { isAuthenticated, authApiClient } from '../utils/authentication.js';
 
 const homePage = new URL('index.html', window.location.href).toString();
+const formCard = document.querySelector('.form-card');
+const form = formCard?.querySelector('.form-card__form');
+
 function init() {
     if (isAuthenticated()) {
         window.location.href = homePage;
         return;
     }
-    
+    if (!formCard || !form) return;
+
     signInButton();
     forgotPassword();
 }
 
 function signInButton() {
-    const formCard = document.querySelector('.form-card');
-    if (formCard) {
-        const signInButton = Button('Sign In', 'primary-btn', 'sign-in', ButtonType.Submit);
-        formCard.insertBefore(signInButton, formCard.lastElementChild);
+    const signInButton = Button('Sign In', 'primary-btn', 'sign-in', ButtonType.Submit);
+    form.insertBefore(signInButton, form.lastElementChild);
+
+    form.addEventListener('submit', async(e) => {
+        const isValid = formValidation(e);
+        if (!isValid) return;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const response = await authApiClient('login', { email, password });
+        if (!response) ToastMessage.apiDataLoadError();
         
-        formCard.addEventListener('submit', async(e) => {
-            const isValid = formValidation(e);
-            if (!isValid) return;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const response = await authApiClient('login', { email, password });
-            if (!response) ToastMessage.apiDataLoadError();
-            
-            const data = await response.json();
-            if (!response.ok) ToastMessage.error('Login failed', data.errors[0].message);
-            
-            const accessToken = data.data.accessToken;
-            if (!accessToken) ToastMessage.error('Unexpected server error', 'No authentication token received');
-            
-            localStorage.setItem('auth_token', data.data.accessToken);
-            window.location.href = homePage;
-        });
-    }
+        const data = await response.json();
+        if (!response.ok) ToastMessage.error('Login failed', data.errors[0].message);
+        
+        const accessToken = data.data.accessToken;
+        if (!accessToken) ToastMessage.error('Unexpected server error', 'No authentication token received');
+        
+        localStorage.setItem('auth_token', data.data.accessToken);
+        window.location.href = homePage;
+    });
 }
 
 function forgotPassword() {
