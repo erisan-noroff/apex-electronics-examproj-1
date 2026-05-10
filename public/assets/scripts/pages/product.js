@@ -2,7 +2,8 @@ import { getProductById } from '../api/productApi.js';
 import { ToastMessage } from '../components/toast-messages.js';
 import { createRatingsElement, createStarsElement } from '../components/ratings.js';
 import { Button } from '../components/buttons.js';
-import { createPriceElement } from '../components/productPrice.js';
+import { PriceElement } from '../components/productPrice.js';
+import { addItemToCart } from '../utils/cart.js';
 
 const main = document.querySelector('main');
 async function init() {
@@ -58,7 +59,7 @@ function renderProduct(product) {
     
     const productInfoPriceRatings = document.createElement('div');
     productInfoPriceRatings.classList.add('product-info__price-ratings');
-    const price = createPriceElement(product.discountedPrice, product.price);
+    const price = PriceElement(product.discountedPrice, product.price);
     productInfoPriceRatings.appendChild(price);
     productInfoContent.appendChild(productInfoPriceRatings);
     
@@ -68,7 +69,7 @@ function renderProduct(product) {
     
     const description = document.createElement('p');
     description.textContent = product.description;
-    description.classList.add('product-description');
+    description.classList.add('product-description', 'text-secondary');
     productInfoContent.appendChild(description);
 
     const tags = productTagsElements(product.tags);
@@ -76,7 +77,7 @@ function renderProduct(product) {
     
     if (product.reviews.length > 0) renderProductReviews(product.rating, product.reviews);
     
-    const button = addToCart();
+    const button = addToCart(product);
     productInfoContent.appendChild(button);
     
     const share = shareLinkElement(product.id);
@@ -97,11 +98,16 @@ function productTagsElements(tags) {
     return tagsElement;
 }
 
-function addToCart() {
+function addToCart(product) {
     const button = Button('Add to Cart', 'primary-btn');
     
     button.addEventListener('click', () => {
-        ToastMessage.success('Added to cart', 'Product has been added to your cart');
+        try {
+            addItemToCart(product);
+             ToastMessage.success('Added to cart', 'Product has been added to your cart.');
+        } catch {
+            ToastMessage.error('Something went wrong', 'Could not add item to cart. Please try again.');
+        }
     });
     
     return button;
@@ -123,11 +129,11 @@ function shareLinkElement(productId) {
     share.addEventListener('click', () => {
         const url = new URL(`product.html?id=${productId}`, window.location.href).toString();
         navigator.clipboard.writeText(url).then(() => {
-            share.classList.add('share-link--copied');
+            share.classList.add('share-link--copied', 'text-secondary');
             shareText.nodeValue = 'Copied to clipboard';
             setTimeout(() => {
                 shareText.nodeValue = 'Share';
-                share.classList.remove('share-link--copied');
+                share.classList.remove('share-link--copied', 'text-secondary');
             }, 3000);
         }).catch(() => {
             ToastMessage.error('Copy failed','Failed to copy link to clipboard');

@@ -1,7 +1,7 @@
 import { getAllProducts } from '../api/productApi.js';
 import { ToastMessage } from '../components/toast-messages.js';
 import { createRatingsElement } from '../components/ratings.js';
-import { createPriceElement } from '../components/productPrice.js';
+import { PriceElement } from '../components/productPrice.js';
 import { Button } from '../components/buttons.js';
 
 function createNavigationButton(iconName, classNameSuffix) {
@@ -80,17 +80,20 @@ function renderCarousel(products) {
         content.append(productName);
 
         const description = document.createElement('p');
-        description.classList.add('product-description');
+        description.classList.add('product-description', 'text-secondary');
         description.textContent = product.description;
         content.append(description);
 
-        const price = createPriceElement(product.discountedPrice, product.price);
+        const price = PriceElement(product.discountedPrice, product.price);
         price.children[0].classList.add('discounted-price');
         content.append(price);
 
         const button = Button('View Product', 'primary-btn carousel-wrapper__item__btn');
         button.dataset.productId = product.id;
         content.append(button);
+        button.addEventListener('click', () => {
+           window.location =  productLink;
+        });
 
         item.append(imageContainer, content);
         return item;
@@ -115,14 +118,14 @@ function renderCarousel(products) {
 
 function renderGrid(products) {
     const section = document.createElement('section');
-    section.classList.add('grid-wrapper', 'content-gutters');
+    section.classList.add('content-gutters');
 
     const h1 = document.createElement('h1');
     h1.textContent = 'What We Offer';
     section.append(h1);
 
     const divGrid = document.createElement('div');
-    divGrid.classList.add('grid');
+    divGrid.classList.add('product-grid');
     section.append(divGrid);
 
     const cards = products.map((product) => {
@@ -142,7 +145,7 @@ function renderGrid(products) {
         title.textContent = product.title;
 
         const reviews = createRatingsElement(product.rating, product.reviews);
-        const price = createPriceElement(product.discountedPrice, product.price);
+        const price = PriceElement(product.discountedPrice, product.price);
 
         card.append(productUrl, title, reviews, price);
         return card;
