@@ -75,3 +75,6 @@ Used AI to replace remaining instances of Font Awesome with Material Design Icon
 
 **06/05/2026**
 Prompted AI to group all usage of color: var(--secondary-text) together to keep CSS DRY as well as appending the new class to the relevant JS code.
+
+**10/05/2026**
+After fighting specifity in CSS, I asked Claude to divide the input non-checkbox/radio fields into a own class, for cleaner CSS.
